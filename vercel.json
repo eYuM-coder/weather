@@ -1,0 +1,13 @@
+{
+  "rewrites": [
+    {"source": "/weather", "/weather.html"},
+    {"source": "/wis-dos", "/wis-dos.html"},
+    {"source": "/weather", "/weather.html"},
+    {"source": "/scanners", "/scanners.html"},
+    {"source": "/warnings", "/warnings.html"},
+    {"source": "/whats-next", "/whats-next.html"},
+    {"source": "/zulu", "/zulu.html"},
+    {"source": "/submit", "/submit.html"},
+    {"source": "/about", "/about.html"},
+  ]
+}

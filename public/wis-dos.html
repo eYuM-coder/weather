@@ -1,0 +1,1941 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link
+      rel="icon"
+      href="/r-fav-dark-256x256.png"
+      type="image/png"
+      media="(prefers-color-scheme: light)"
+    />
+    <link
+      rel="icon"
+      href="/r-fav.png"
+      type="image/png"
+      media="(prefers-color-scheme: dark)"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>eYuM | Severe Weather Coverage & Forecasts</title>
+    <meta
+      name="description"
+      content="Official home of eYuM — live severe weather coverage, expert forecasts, radar tools, preparedness tips, and community updates from Ryan Hall. eYuM is an independent, solo future meteorologist inspired by Ryan Hall, providing real-time weather coverage whenever possible."
+    />
+    <meta name="author" content="Ryan Hall & eYuM" />
+    <meta
+      name="keywords"
+      content="Ryan Hall Y'all, Ryan Hall, eYuM, weather forecast, severe weather updates, live radar, storm tracking, meteorologist"
+    />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#0b1f3a" />
+    <link rel="canonical" href="https://we.eyum.dev" />
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://we.eyum.dev/" />
+    <meta
+      property="og:title"
+      content="eYuM | Severe Weather Coverage & Forecasts"
+    />
+    <meta
+      property="og:description"
+      content="Official home of eYuM — live severe weather coverage, expert forecasts, radar tools, preparedness tips, and community updates from Ryan Hall. eYuM is an independent, solo future meteorologist inspired by Ryan Hall, providing real-time weather coverage whenever possible."
+    />
+    <meta property="og:image" content="https://we.eyum.dev/og-image.png" />
+    <meta property="og:image:alt" content="eYuM severe weather coverage" />
+    <meta property="og:site_name" content="eYuM" />
+    <meta property="og:locale" content="en_US" />
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://we.eyum.dev/" />
+    <meta
+      property="twitter:title"
+      content="eYuM | Severe Weather Coverage & Forecasts"
+    />
+    <meta
+      property="twitter:description"
+      content="Official home of eYuM — live severe weather coverage, expert forecasts, radar tools, preparedness tips, and community updates from Ryan Hall. eYuM is an independent, solo future meteorologist inspired by Ryan Hall, providing real-time weather coverage whenever possible."
+    />
+    <meta property="twitter:image" content="https://we.eyum.dev/og-image.png" />
+    <meta property="twitter:site" content="@eYuM_Not_MuYe" />
+    <meta property="twitter:creator" content="@eYuM_Not_MuYe" />
+    <link rel="stylesheet" href="rhystyles.css" />
+    <script>
+      const link = document.createElement("link");
+      link.rel = "stylesheet";
+      link.href = "styles.css?v=" + Date.now();
+      document.head.appendChild(link);
+    </script>
+  </head>
+  <body>
+    <div
+      role="region"
+      aria-label="Notifications (F8)"
+      tabindex="-1"
+      style="pointer-events: none"
+    >
+      <ol
+        tabindex="-1"
+        class="fixed top-0 z-[100] flex max-h-screen w-full flex-col-reverse p-4 sm:bottom-0 sm:right-0 sm:top-auto sm:flex-col md:max-w-[420px]"
+      ></ol>
+    </div>
+    <div class="min-h-screen flex flex-col">
+      <header
+        class="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-monitor-bg/80 border-b border-monitor-border/50 shadow-lg"
+      >
+        <div class="container mx-auto px-4">
+          <div class="flex items-center justify-between h-16">
+            <div class="flex items-center gap-4">
+              <a class="group relative" href="/">
+                <div
+                  class="absolute -inset-2 bg-monitor-active/20 rounded-lg blur opacity-0 group-hover:opacity-100 transition duration-500"
+                ></div>
+                <img
+                  src="/EYUMHEADER.png"
+                  alt="eYuM Logo"
+                  class="h-8 w-8 object-cover rounded-full"
+                />
+              </a>
+            </div>
+            <nav
+              class="flex items-center gap-1 md:gap-2 overflow-x-auto scrollbar-hide max-w-full pl-2"
+            >
+              <a
+                class="flex items-center space-x-1 md:space-x-2 px-3 py-2 rounded-md transition-all whitespace-nowrap outline-none font-medium text-sm border border-transparent shrink-0 text-gray-400 hover:text-white hover:bg-white/5"
+                href="/"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-house w-4 h-4 flex-shrink-0"
+                >
+                  <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"></path>
+                  <path
+                    d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"
+                  ></path>
+                </svg>
+                <span class="hidden md:inline">Home</span>
+              </a>
+              <a
+                class="flex items-center space-x-1 md:space-x-2 px-3 py-2 rounded-md transition-all whitespace-nowrap outline-none font-medium text-sm border border-transparent shrink-0 text-gray-400 hover:text-white hover:bg-white/5"
+                href="/weather"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-cloud w-4 h-4 flex-shrink-0"
+                >
+                  <path
+                    d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"
+                  ></path>
+                </svg>
+                <span class="hidden md:inline">Weather</span>
+              </a>
+              <button
+                type="button"
+                id="toolsButton"
+                aria-haspopup="menu"
+                aria-expanded="false"
+                data-state="closed"
+                class="flex items-center space-x-1 md:space-x-2 px-3 py-2 rounded-md transition-all whitespace-nowrap font-medium text-sm border shrink-0 bg-monitor-active/10 text-monitor-active border-monitor-active/20"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-wrench w-4 h-4 flex-shrink-0"
+                >
+                  <path
+                    d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"
+                  ></path>
+                </svg>
+                <span class="hidden md:inline">Tools</span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-chevron-down w-3 h-3 flex-shrink-0 opacity-50"
+                >
+                  <path d="m6 9 6 6 6-6"></path>
+                </svg>
+              </button>
+
+              <!-- DROPDOWN -->
+              <div
+                id="toolsMenu"
+                class="hidden fixed z-50 overflow-hidden rounded-md border text-popover-foreground data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 bg-monitor-card/95 backdrop-blur-xl border-monitor-border/50 shadow-xl p-1 min-w-[200px]"
+                data-state="closed"
+                data-side="bottom"
+                data-align="center"
+                aria-orientation="vertical"
+                role="menu"
+              >
+                <div
+                  class="px-2 py-1.5 text-xs font-bold text-gray-500 uppercase tracking-wider"
+                >
+                  Mission Tools
+                </div>
+                <!-- WIS/DOS -->
+                <a
+                  href="/wis-dos"
+                  class="menu-item relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 flex items-center space-x-2 text-gray-300 hover:text-white hover:bg-white/5 rounded-sm cursor-pointer p-2"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="lucide lucide-info w-4 h-4 text-blue-400"
+                  >
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="M12 16v-4" />
+                    <path d="M12 8h.01" />
+                  </svg>
+                  <span>WIS/DOS</span>
+                </a>
+
+                <!-- Scanners -->
+                <a
+                  href="/scanners"
+                  class="menu-item relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 flex items-center space-x-2 text-gray-300 hover:text-white hover:bg-white/5 rounded-sm cursor-pointer p-2"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="lucide lucide-radio w-4 h-4 text-green-400"
+                  >
+                    <path d="M4.9 19.1C1 15.2 1 8.8 4.9 4.9" />
+                    <path d="M7.8 16.2c-2.3-2.3-2.3-6.1 0-8.5" />
+                    <circle cx="12" cy="12" r="2" />
+                    <path d="M16.2 7.8c2.3 2.3 2.3 6.1 0 8.5" />
+                    <path d="M19.1 4.9C23 8.8 23 15.1 19.1 19" />
+                  </svg>
+                  <span>Scanners</span>
+                </a>
+
+                <!-- Top 10 Warnings -->
+                <a
+                  href="/warnings"
+                  class="menu-item relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 flex items-center space-x-2 text-gray-300 hover:text-white hover:bg-white/5 rounded-sm cursor-pointer p-2"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="lucide lucide-triangle-alert w-4 h-4 text-red-400"
+                  >
+                    <path
+                      d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"
+                    />
+                    <path d="M12 9v4" />
+                    <path d="M12 17h.01" />
+                  </svg>
+                  <span>Top 10 Warnings</span>
+                </a>
+
+                <!-- What's Next -->
+                <a
+                  class="menu-item relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 flex items-center space-x-2 text-gray-300 hover:text-white hover:bg-white/5 rounded-sm cursor-pointer p-2"
+                  href="/whats-next"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="lucide lucide-timer w-4 h-4 text-cyan-400"
+                  >
+                    <line x1="10" x2="14" y1="2" y2="2"></line>
+                    <line x1="12" x2="15" y1="14" y2="11"></line>
+                    <circle cx="12" cy="14" r="8"></circle>
+                  </svg>
+                  <span>What's Next?</span>
+                </a>
+
+                <!-- Zulu Converter -->
+                <a
+                  href="/zulu"
+                  class="menu-item relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 flex items-center space-x-2 text-gray-300 hover:text-white hover:bg-white/5 rounded-sm cursor-pointer p-2"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="lucide lucide-clock w-4 h-4 text-orange-400"
+                  >
+                    <circle cx="12" cy="12" r="10" />
+                    <polyline points="12 6 12 12 16 14" />
+                  </svg>
+                  <span>Zulu Converter</span>
+                </a>
+              </div>
+
+              <a
+                class="flex items-center space-x-1 md:space-x-2 px-3 py-2 rounded-md transition-all whitespace-nowrap outline-none font-medium text-sm border border-transparent shrink-0 text-gray-400 hover:text-white hover:bg-white/5"
+                href="/submit"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-camera w-4 h-4 flex-shrink-0"
+                >
+                  <path
+                    d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"
+                  ></path>
+                  <circle cx="12" cy="13" r="3"></circle>
+                </svg>
+                <span class="hidden md:inline">Submit</span>
+              </a>
+              <a
+                class="flex items-center space-x-1 md:space-x-2 px-3 py-2 rounded-md transition-all whitespace-nowrap outline-none font-medium text-sm border border-transparent shrink-0 text-gray-400 hover:text-white hover:bg-white/5"
+                href="/blog"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-newspaper w-4 h-4 flex-shrink-0"
+                >
+                  <path
+                    d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"
+                  ></path>
+                  <path d="M18 14h-8"></path>
+                  <path d="M15 18h-5"></path>
+                  <path d="M10 6h8v4h-8V6Z"></path>
+                </svg>
+                <span class="hidden md:inline">Blog</span>
+              </a>
+              <a
+                class="flex items-center space-x-1 md:space-x-2 px-3 py-2 rounded-md transition-all whitespace-nowrap outline-none font-medium text-sm border border-transparent shrink-0 text-gray-400 hover:text-white hover:bg-white/5"
+                href="/about"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-info w-4 h-4 flex-shrink-0"
+                >
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <path d="M12 16v-4"></path>
+                  <path d="M12 8h.01"></path>
+                </svg>
+                <span class="hidden md:inline">About</span>
+              </a>
+              <button
+                type="button"
+                id="radix-:r2:"
+                aria-haspopup="menu"
+                aria-expanded="false"
+                data-state="closed"
+                class="flex items-center space-x-1 md:space-x-2 px-2 md:px-4 py-2 rounded-lg transition-colors text-white/70 hover:text-white hover:bg-white/5 whitespace-nowrap outline-none"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-menu w-4 h-4 flex-shrink-0"
+                >
+                  <line x1="4" x2="20" y1="12" y2="12"></line>
+                  <line x1="4" x2="20" y1="6" y2="6"></line>
+                  <line x1="4" x2="20" y1="18" y2="18"></line>
+                </svg>
+                <span class="text-sm md:text-base">More</span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-chevron-down w-4 h-4 flex-shrink-0"
+                >
+                  <path d="m6 9 6 6 6-6"></path>
+                </svg>
+              </button>
+              <a
+                href="https://www.youtube.com/watch?v=ezp-7eLXBVs"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="flex items-center space-x-1 md:space-x-2 px-3 py-1.5 rounded-full transition-all whitespace-nowrap font-medium ml-2 text-sm shrink-0 bg-red-500/10 border border-red-500/50 text-red-400 hover:bg-red-500/20 hover:text-red-300 shadow-[0_0_10px_rgba(239,68,68,0.2)]"
+              >
+                <div class="flex items-center gap-2">
+                  <div class="relative flex h-2 w-2">
+                    <span
+                      class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"
+                    ></span>
+                    <span
+                      class="relative inline-flex rounded-full h-2 w-2 bg-red-500"
+                    ></span>
+                  </div>
+                  <span class="text-xs font-bold"> LIVE </span>
+                </div>
+              </a>
+            </nav>
+          </div>
+        </div>
+      </header>
+      <main class="flex-grow pt-16">
+        <div class="min-h-screen">
+          <div class="container mx-auto px-4 py-8 space-y-8">
+            <div class="text-center mb-8">
+              <h1
+                class="text-4xl font-bold mb-4 font-tech uppercase tracking-wider text-white drop-shadow-[0_0_15px_rgba(168,85,247,0.3)]"
+              >
+                WIS/DOS Protocols
+              </h1>
+              <p
+                class="text-lg text-gray-400 max-w-3xl mx-auto font-mono text-sm"
+              >
+                // WEATHER INTENSITY SCORE // DAILY OUTLOOK SCORE // ALGORITHM
+                EXPLAINED
+              </p>
+            </div>
+            <div
+              class="rounded-lg border bg-card text-card-foreground shadow-sm tech-card p-6 mb-8 border-monitor-border"
+            >
+              <div class="flex items-start justify-between mb-4">
+                <div class="flex-1">
+                  <div class="flex items-center gap-2 mb-1">
+                    <h2
+                      class="text-xl font-bold font-tech uppercase tracking-wide text-white"
+                    >
+                      Weather Intensity Score
+                    </h2>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="lucide lucide-activity w-4 h-4 text-gray-500"
+                      id="lucide-activity-icon"
+                    >
+                      <path
+                        d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"
+                      ></path>
+                    </svg>
+                  </div>
+                  <div class="flex items-center gap-3 flex-wrap">
+                    <div class="flex items-center gap-2">
+                      <span
+                        id="score"
+                        class="text-5xl font-bold font-mono transition-all duration-500 text-white"
+                      >
+                        --
+                      </span>
+                    </div>
+                    <span
+                      id="scoreThreshold"
+                      class="text-gray-500 font-mono text-sm self-end mb-2"
+                    >
+                      / --
+                    </span>
+                    <div
+                      id="aboveThresholdBadge"
+                      class="hidden inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-destructive text-destructive-foreground hover:bg-destructive/80 animate-pulse"
+                    >
+                      Above Threshold!
+                    </div>
+                  </div>
+                  <div
+                    class="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-gray-400 font-mono uppercase tracking-wide"
+                  >
+                    <span id="percentLabel">--% Saturation</span>
+                    <span class="hidden sm:inline text-gray-700">|</span>
+                    <span id="rhyPercentLabel" class="inline-flex">
+                      --% of RHY's threshold
+                    </span>
+                    <span class="hidden sm:inline text-gray-700">•</span>
+                    <span class="flex items-center gap-1.5">
+                      <span class="relative flex h-1.5 w-1.5">
+                        <span
+                          class="animate-ping absolute inline-flex h-full w-full rounded-full bg-monitor-success opacity-75"
+                        ></span>
+                        <span
+                          class="relative flex rounded-full h-1.5 w-1.5 bg-monitor-success"
+                        ></span>
+                      </span>
+                      Real-time Telemetry
+                    </span>
+                  </div>
+                </div>
+                <div class="ml-4 flex-shrink-0">
+                  <div
+                    id="statusBadge"
+                    class="hidden inline-flex items-center rounded-full border transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 gap-2 px-3 py-1.5 text-xs font-bold font-mono tracking-wide bg-monitor-card border-monitor-border text-gray-500"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="lucide lucide-radio w-4 h-4"
+                    >
+                      <path d="M4.9 19.1C1 15.2 1 8.8 4.9 4.9"></path>
+                      <path d="M7.8 16.2c-2.3-2.3-2.3-6.1 0-8.5"></path>
+                      <circle cx="12" cy="12" r="2"></circle>
+                      <path d="M16.2 7.8c2.3 2.3 2.3 6.1 0 8.5"></path>
+                      <path d="M19.1 4.9C23 8.8 23 15.1 19.1 19"></path>
+                    </svg>
+                    NOT STREAMING
+                  </div>
+                </div>
+              </div>
+              <div
+                id="graphScaler"
+                class="bg-black/20 rounded-lg p-4 mb-4 w-full relative"
+              >
+                <canvas
+                  width="200"
+                  height="200"
+                  class="w-full"
+                  id="wisGraph"
+                  style="display: block; width: 200px; height: 200px"
+                ></canvas>
+                <div
+                  id="infoKey"
+                  class="flex items-center justify-center gap-6 mt-2 text-sm"
+                >
+                  <div class="flex items-center gap-2">
+                    <div
+                      class="w-4 h-1 bg-gradient-to-r from-green-400 to-rose-400 rounded animate-pulse"
+                    ></div>
+                    <span class="text-muted-foreground">History</span>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <div
+                      class="w-4 h-1 bg-blue-500 rounded"
+                      style="
+                        background-image: repeating-linear-gradient(
+                          90deg,
+                          rgb(59, 130, 246) 0px,
+                          rgb(59, 130, 246) 5px,
+                          transparent 5px,
+                          transparent 10px
+                        );
+                      "
+                    ></div>
+                    <span class="text-muted-foreground">Forecast</span>
+                  </div>
+                  <div class="flex items-center gap-2" id="threshold-marker">
+                    <div
+                      class="w-4 h-1 bg-red-500 rounded"
+                      style="
+                        background-image: repeating-linear-gradient(
+                          90deg,
+                          rgb(239, 68, 68) 0px,
+                          rgb(239, 68, 68) 5px,
+                          transparent 5px,
+                          transparent 10px
+                        );
+                      "
+                    ></div>
+                    <span class="text-muted-foreground">Threshold</span>
+                  </div>
+                </div>
+                <div class="flex items-center justify-end mt-2">
+                  <label
+                    for="threshold-toggle"
+                    class="flex items-center gap-2 cursor-pointer"
+                  >
+                    <span class="text-sm text-muted-foreground"
+                      >Show threshold</span
+                    ><button
+                      type="button"
+                      role="switch"
+                      aria-checked="true"
+                      data-state="checked"
+                      value="on"
+                      class="peer inline-flex h-6 w-11 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=unchecked]:bg-input"
+                      id="threshold-toggle"
+                    >
+                      <span
+                        data-state="checked"
+                        class="pointer-events-none block h-5 w-5 rounded-full bg-background shadow-lg ring-0 transition-transform data-[state=checked]:translate-x-5 data-[state=unchecked]:translate-x-0"
+                        id="threshold-toggle-circle"
+                      ></span>
+                    </button>
+                  </label>
+                </div>
+              </div>
+              <div id="roast"></div>
+              <div
+                class="bg-monitor-active/5 rounded-lg p-4 border border-monitor-active/20 relative overflow-hidden"
+              >
+                <div
+                  class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-monitor-active/50 to-transparent"
+                ></div>
+                <h3
+                  class="font-bold text-sm mb-2 flex items-center gap-2 font-tech uppercase tracking-wide text-monitor-active"
+                >
+                  <span
+                    class="w-1.5 h-1.5 bg-monitor-active rounded-full"
+                  ></span>
+                  Forecast Analysis
+                  <span class="text-[10px] text-gray-500 font-mono ml-auto"
+                    >AI GENERATED REPORT</span
+                  >
+                </h3>
+                <div class="relative">
+                  <p
+                    id="forecastAnalysis"
+                    class="text-sm text-gray-300 leading-relaxed font-sans"
+                  >
+                    Loading forecast...
+                  </p>
+                  <button
+                    id="toggle-forecast-length"
+                    class="inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 rounded-md mt-2 h-auto p-0 text-monitor-active hover:text-white font-mono text-xs uppercase tracking-wide hover:bg-transparent"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="lucide lucide-chevron-down w-4 h-4 mr-1"
+                    >
+                      <path d="m6 9 6 6 6-6"></path>
+                    </svg>
+                    Expand Analysis
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div
+              class="rounded-lg border bg-card text-card-foreground shadow-sm tech-card p-5 mb-8 border-monitor-border"
+            >
+              <div class="flex items-start justify-between mb-6">
+                <div class="flex-1">
+                  <div class="flex items-center gap-2 mb-1">
+                    <h2
+                      class="text-xl font-bold font-tech tracking-wide uppercase text-white"
+                    >
+                      Daily Outlook Score
+                    </h2>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="lucide lucide-video w-4 h-4 text-gray-500"
+                    >
+                      <path
+                        d="m16 13 5.223 3.482a.5.5 0 0 0 .777-.416V7.87a.5.5 0 0 0-.752-.432L16 10.5"
+                      ></path>
+                      <rect x="2" y="6" width="14" height="12" rx="2"></rect>
+                    </svg>
+                  </div>
+                  <div class="flex items-center gap-4 mt-2 flex-wrap">
+                    <div class="flex items-center gap-2 text-sm font-mono">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        class="lucide lucide-trending-up w-4 h-4 text-green-400"
+                      >
+                        <polyline
+                          points="22 7 13.5 15.5 8.5 10.5 2 17"
+                        ></polyline>
+                        <polyline points="16 7 22 7 22 13"></polyline>
+                      </svg>
+                      <span
+                        class="text-muted-foreground"
+                        id="likelyUploadCount"
+                      >
+                        <span class="text-green-400 font-semibold">0</span>
+                        likely uploads
+                      </span>
+                    </div>
+                    <span class="text-muted-foreground hidden sm:inline">
+                      •
+                    </span>
+                    <span
+                      class="text-sm text-muted-foreground"
+                      id="possibleUploadCount"
+                    >
+                      <span class="text-yellow-400 font-semibold">0</span>
+                      possible
+                    </span>
+                  </div>
+                </div>
+                <div class="ml-4 flex-shrink-0">
+                  <div
+                    class="inline-flex items-center rounded-full px-2.5 py-0.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 hover:bg-secondary/80 gap-2 bg-monitor-card border border-monitor-border text-gray-400 font-mono text-xs uppercase tracking-wide"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="lucide lucide-calendar w-3 h-3"
+                    >
+                      <path d="M8 2v4"></path>
+                      <path d="M16 2v4"></path>
+                      <rect width="18" height="18" x="3" y="4" rx="2"></rect>
+                      <path d="M3 10h18"></path>
+                    </svg>
+                    7 Day Projection
+                  </div>
+                </div>
+              </div>
+              <div
+                class="bg-black/20 rounded-lg p-3 overflow-x-auto scrollbar-subtle"
+              >
+                <div class="flex gap-4 min-w-fit pb-2" id="dosDays"></div>
+                <div
+                  class="flex items-center justify-center gap-6 mt-4 text-[10px] font-mono uppercase tracking-wider text-gray-500"
+                >
+                  <div class="flex items-center gap-2">
+                    <div class="w-2 h-2 rounded-full bg-monitor-success"></div>
+                    <span>Yes</span>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <div class="w-2 h-2 rounded-full bg-yellow-400"></div>
+                    <span>Probably</span>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <div class="w-2 h-2 rounded-full bg-orange-400"></div>
+                    <span>Maybe</span>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <div class="w-2 h-2 rounded-full bg-monitor-danger"></div>
+                    <span>No/Unlikely</span>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <div class="w-2 h-2 rounded-full bg-cyan-400"></div>
+                    <span>Posted</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="rounded-lg border bg-card text-card-foreground shadow-sm tech-card border-monitor-border"
+              data-collapse
+            >
+              <button
+                class="w-full flex items-center justify-between hover:opacity-80 transition-opacity p-6"
+              >
+                <div class="flex items-center space-x-3">
+                  <div
+                    class="p-2 bg-monitor-active/10 rounded-lg border border-monitor-active/30"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="lucide lucide-info w-6 h-6 text-monitor-active"
+                    >
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <path d="M12 16v-4"></path>
+                      <path d="M12 8h.01"></path>
+                    </svg>
+                  </div>
+                  <div class="text-left">
+                    <h2
+                      class="text-2xl font-bold font-tech uppercase tracking-wide text-white"
+                    >
+                      Weather Intensity Score (WIS)
+                    </h2>
+                    <p class="text-sm text-gray-400 font-mono">
+                      REAL-TIME MONITORING ALGORITHM
+                    </p>
+                  </div>
+                </div>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-chevron-right w-6 h-6 text-gray-500"
+                >
+                  <path d="m9 18 6-6-6-6"></path>
+                </svg>
+              </button>
+              <div
+                class="overflow-hidden transition-all duration-300 border-t border-monitor-border/30 max-h-0"
+              >
+                <div class="prose prose-invert max-w-none p-6 pt-6">
+                  <div
+                    class="bg-gradient-to-br from-monitor-active/5 to-purple-500/5 rounded-lg border border-monitor-active/20 p-6 mb-6"
+                  >
+                    <h3
+                      class="text-xl font-semibold mb-3 font-tech uppercase tracking-wide text-white"
+                    >
+                      What is the Weather Intensity Score?
+                    </h3>
+                    <p class="text-gray-300 font-sans">
+                      The Weather Intensity Score (WIS) is an internal real-time
+                      weather monitoring algorithm developed by Ryan Hall. Think
+                      of it as a "weather intensity thermometer" that measures
+                      how severe and impactful weather is across the United
+                      States RIGHT NOW, at this very minute. Unlike the Daily
+                      Outlook Score which looks ahead, WIS tells the team what's
+                      happening in real-time.
+                    </p>
+                    <p
+                      class="mt-3 text-sm text-monitor-warning font-mono border-l-2 border-monitor-warning/50 pl-3"
+                    >
+                      <strong class="text-white">IMPORTANT NOTE:</strong> The
+                      Weather Intensity Score is primarily an internal tool used
+                      by the Ryan Hall, Y'all team. While the public may find it
+                      interesting to follow along, any personal decisions based
+                      on WIS should be made at your own discretion. Always
+                      consult official local weather warnings and radar for your
+                      area.
+                    </p>
+                  </div>
+                  <h3
+                    class="text-xl font-bold mb-3 font-tech uppercase tracking-wide text-white"
+                  >
+                    How to Read the Score
+                  </h3>
+                  <p class="text-sm text-gray-400 mb-4 font-mono">
+                    // WIS RANGE: 0-150+ // HIGHER VALUES INDICATE INCREASED
+                    SEVERITY
+                  </p>
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                    <div
+                      class="bg-monitor-card/50 border border-monitor-border/30 rounded-lg p-4"
+                    >
+                      <h4
+                        class="font-bold text-monitor-success font-tech uppercase tracking-wide"
+                      >
+                        0-30: Mostly Quiet
+                      </h4>
+                      <p class="text-sm text-gray-400 font-sans">
+                        Weather across the country is fairly calm with minimal
+                        RHY team activity.
+                      </p>
+                    </div>
+                    <div
+                      class="bg-monitor-card/50 border border-monitor-border/30 rounded-lg p-4"
+                    >
+                      <h4
+                        class="font-bold text-yellow-400 font-tech uppercase tracking-wide"
+                      >
+                        30-50: Some Activity
+                      </h4>
+                      <p class="text-sm text-gray-400 font-sans">
+                        Weather is happening somewhere and the team is
+                        monitoring closely.
+                      </p>
+                    </div>
+                    <div
+                      class="bg-monitor-card/50 border border-monitor-border/30 rounded-lg p-4"
+                    >
+                      <h4
+                        class="font-bold text-orange-400 font-tech uppercase tracking-wide"
+                      >
+                        50-70: Notable Weather
+                      </h4>
+                      <p class="text-sm text-gray-400 font-sans">
+                        RHY team is paying close attention and standby mode is
+                        likely.
+                      </p>
+                    </div>
+                    <div
+                      class="bg-monitor-card/50 border border-monitor-border/30 rounded-lg p-4"
+                    >
+                      <h4
+                        class="font-bold text-monitor-danger font-tech uppercase tracking-wide"
+                      >
+                        70-100: Significant Events
+                      </h4>
+                      <p class="text-sm text-gray-400 font-sans">
+                        A developing situation; the team is often going live
+                        with coverage.
+                      </p>
+                    </div>
+                    <div
+                      class="bg-monitor-card/50 border border-monitor-border/30 rounded-lg p-4"
+                    >
+                      <h4
+                        class="font-bold text-red-600 font-tech uppercase tracking-wide"
+                      >
+                        100-150: Multiple Areas Impacted
+                      </h4>
+                      <p class="text-sm text-gray-400 font-sans">
+                        Full team coverage mode with several regions being
+                        affected.
+                      </p>
+                    </div>
+                    <div
+                      class="bg-monitor-card/50 border border-monitor-border/30 rounded-lg p-4"
+                    >
+                      <h4
+                        class="font-bold text-purple-500 font-tech uppercase tracking-wide"
+                      >
+                        150-250: Major Outbreak
+                      </h4>
+                      <p class="text-sm text-gray-400 font-sans">
+                        An ongoing severe outbreak requiring all hands on deck.
+                      </p>
+                    </div>
+                    <div
+                      class="bg-monitor-card/50 border border-monitor-border/30 rounded-lg p-4"
+                    >
+                      <h4
+                        class="font-bold text-fuchsia-400 font-tech uppercase tracking-wide"
+                      >
+                        250-350: Extreme Event
+                      </h4>
+                      <p class="text-sm text-gray-400 font-sans">
+                        A high-end event in progress demanding continuous live
+                        coverage.
+                      </p>
+                    </div>
+                    <div
+                      class="bg-monitor-card/50 border border-monitor-border/30 rounded-lg p-4"
+                    >
+                      <h4
+                        class="font-bold text-rose-400 font-tech uppercase tracking-wide"
+                      >
+                        350+: Potentially Historic
+                      </h4>
+                      <p class="text-sm text-gray-400 font-sans">
+                        Potentially historic events; scores above 500 have
+                        occurred during major outbreaks.
+                      </p>
+                    </div>
+                  </div>
+                  <h4
+                    class="text-lg font-bold mb-3 font-tech uppercase tracking-wide text-white"
+                  >
+                    Real-World Examples
+                  </h4>
+                  <div class="space-y-4 mb-6">
+                    <div
+                      class="bg-monitor-card/50 border border-monitor-border/30 rounded-lg p-4"
+                    >
+                      <h5
+                        class="font-bold text-yellow-400 font-mono text-sm uppercase"
+                      >
+                        Some Activity (30-50)
+                      </h5>
+                      <ul
+                        class="list-disc list-inside text-sm text-gray-400 space-y-1 font-sans mt-2"
+                      >
+                        <li>
+                          A few severe thunderstorm warnings scattered across
+                          states
+                        </li>
+                        <li>Perhaps 2-3 tornado warnings in rural areas</li>
+                        <li>Minor winter weather advisories</li>
+                        <li>
+                          Example: 3 tornado warnings in rural Oklahoma might
+                          score 40
+                        </li>
+                      </ul>
+                    </div>
+                    <div
+                      class="bg-monitor-card/50 border border-monitor-border/30 rounded-lg p-4"
+                    >
+                      <h5
+                        class="font-bold text-monitor-danger font-mono text-sm uppercase"
+                      >
+                        Significant Events (70-100)
+                      </h5>
+                      <ul
+                        class="list-disc list-inside text-sm text-gray-400 space-y-1 font-sans mt-2"
+                      >
+                        <li>Multiple tornado warnings across several states</li>
+                        <li>Severe weather ramping up regionally</li>
+                        <li>Major winter storm beginning to impact cities</li>
+                        <li>Population centers starting to be affected</li>
+                      </ul>
+                    </div>
+                    <div
+                      class="bg-monitor-card/50 border border-monitor-border/30 rounded-lg p-4"
+                    >
+                      <h5
+                        class="font-bold text-purple-500 font-mono text-sm uppercase"
+                      >
+                        Major Outbreak (150-250)
+                      </h5>
+                      <ul
+                        class="list-disc list-inside text-sm text-gray-400 space-y-1 font-sans mt-2"
+                      >
+                        <li>Numerous tornado warnings across a large region</li>
+                        <li>
+                          Confirmed tornadoes on the ground in multiple states
+                        </li>
+                        <li>Major cities under threat</li>
+                        <li>Significant damage occurring</li>
+                      </ul>
+                    </div>
+                    <div
+                      class="bg-monitor-card/50 border border-monitor-border/30 rounded-lg p-4"
+                    >
+                      <h5
+                        class="font-bold text-rose-400 font-mono text-sm uppercase"
+                      >
+                        Historic Event (350+)
+                      </h5>
+                      <ul
+                        class="list-disc list-inside text-sm text-gray-400 space-y-1 font-sans mt-2"
+                      >
+                        <li>March 14, 2025 outbreak (score exceeded 500)</li>
+                        <li>
+                          Multiple, potentially violent tornadoes impacting
+                          populated areas
+                        </li>
+                        <li>Potentially generational weather disaster</li>
+                        <li>
+                          Regional to potentially national emergency level event
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <h3
+                    class="text-xl font-bold mb-3 font-tech uppercase tracking-wide text-white"
+                  >
+                    What Makes the Score Go Up?
+                  </h3>
+                  <ul class="space-y-2 mb-6 text-gray-300 font-sans">
+                    <li class="flex items-start">
+                      <span class="text-monitor-active mr-2">></span>
+                      <div>
+                        <strong class="text-white"
+                          >Severe Weather Warnings:</strong
+                        >
+                        Tornado warnings have the biggest impact, especially in
+                        populated areas
+                      </div>
+                    </li>
+                    <li class="flex items-start">
+                      <span class="text-monitor-active mr-2">></span>
+                      <div>
+                        <strong class="text-white">Population Impact:</strong> A
+                        tornado warning in a major city increases the score more
+                        than one in a rural area
+                      </div>
+                    </li>
+                    <li class="flex items-start">
+                      <span class="text-monitor-active mr-2">></span>
+                      <div>
+                        <strong class="text-white">Live Verification:</strong>
+                        Storm chasers streaming, traffic cameras showing severe
+                        conditions
+                      </div>
+                    </li>
+                    <li class="flex items-start">
+                      <span class="text-monitor-active mr-2">></span>
+                      <div>
+                        <strong class="text-white">Public Interest:</strong>
+                        Millions watching weather coverage indicates severity
+                      </div>
+                    </li>
+                  </ul>
+                  <div
+                    class="bg-monitor-danger/10 border border-monitor-danger/30 rounded-lg p-4 mb-6"
+                  >
+                    <h4
+                      class="font-bold text-monitor-danger mb-2 font-tech uppercase tracking-wide"
+                    >
+                      Critical Understanding
+                    </h4>
+                    <p class="text-sm text-gray-300 font-sans">
+                      WIS is a NATIONAL view of weather intensity. A single
+                      tornado warning in a rural area might only generate a
+                      score of 10-20, even though that tornado could be
+                      life-threatening for those in its path. Never use WIS for
+                      local weather decisions - always check your local warnings
+                      and radar.
+                    </p>
+                  </div>
+                  <h3
+                    class="text-xl font-bold mb-3 font-tech uppercase tracking-wide text-white"
+                  >
+                    Key Points to Remember
+                  </h3>
+                  <ul class="space-y-2 text-gray-300 font-sans">
+                    <li class="flex items-start">
+                      <span class="text-purple-400 mr-2">•</span>WIS measures
+                      weather happening RIGHT NOW, updated every 60 seconds
+                    </li>
+                    <li class="flex items-start">
+                      <span class="text-purple-400 mr-2">•</span>Scores above
+                      50-70 often trigger RHY team standby or live coverage
+                    </li>
+                    <li class="flex items-start">
+                      <span class="text-purple-400 mr-2">•</span>High scores
+                      mean active weather somewhere in the US, not necessarily
+                      in your area
+                    </li>
+                    <li class="flex items-start">
+                      <span class="text-purple-400 mr-2">•</span>Always use
+                      official warnings and local radar for safety decisions
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div
+              class="rounded-lg border bg-card text-card-foreground shadow-sm tech-card border-monitor-border"
+              data-collapse
+            >
+              <button
+                class="w-full flex items-center justify-between hover:opacity-80 transition-opacity p-6"
+              >
+                <div class="flex items-center space-x-3">
+                  <div
+                    class="p-2 bg-purple-500/10 rounded-lg border border-purple-500/30"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="lucide lucide-info w-6 h-6 text-purple-400"
+                    >
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <path d="M12 16v-4"></path>
+                      <path d="M12 8h.01"></path>
+                    </svg>
+                  </div>
+                  <div class="text-left">
+                    <h2
+                      class="text-2xl font-bold font-tech uppercase tracking-wide text-white"
+                    >
+                      Daily Outlook Score (DOS)
+                    </h2>
+                    <p class="text-sm text-gray-400 font-mono">
+                      7-DAY FORECAST IMPORTANCE METRIC
+                    </p>
+                  </div>
+                </div>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-chevron-right w-6 h-6 text-gray-500"
+                >
+                  <path d="m9 18 6-6-6-6"></path>
+                </svg>
+              </button>
+              <div
+                class="overflow-hidden transition-all duration-300 border-t border-monitor-border/30 max-h-0"
+              >
+                <div class="prose prose-invert max-w-none p-6 pt-6">
+                  <div
+                    class="bg-gradient-to-br from-purple-500/10 to-pink-500/10 rounded-lg border border-purple-500/20 p-6 mb-6"
+                  >
+                    <h3
+                      class="text-xl font-bold mb-3 font-tech uppercase tracking-wide text-white"
+                    >
+                      What is the Daily Outlook Score?
+                    </h3>
+                    <p class="text-gray-300 font-sans">
+                      The Daily Outlook Score (DOS) is an internal weather
+                      forecasting algorithm developed by Ryan Hall. Think of it
+                      as a "weather importance thermometer" - it measures how
+                      significant weather events will be over the next seven
+                      days across the United States. Unlike current weather
+                      alerts, DOS looks ahead to help you plan for what's
+                      coming.
+                    </p>
+                    <p
+                      class="mt-3 text-sm text-monitor-warning font-mono border-l-2 border-monitor-warning/50 pl-3"
+                    >
+                      <strong class="text-white">Important Note:</strong> The
+                      Daily Outlook Score is primarily an internal tool used by
+                      the Ryan Hall, Y'all team to determine plans around
+                      videos, live streams, forecasts, and potential relief
+                      missions. While the public may find it interesting to
+                      follow along, any personal decisions based on DOS should
+                      be made at your own discretion.
+                    </p>
+                  </div>
+                  <h3
+                    class="text-xl font-bold mb-3 font-tech uppercase tracking-wide text-white"
+                  >
+                    How to Read the Score
+                  </h3>
+                  <p class="text-sm text-gray-400 mb-4 font-mono">
+                    // DOS RANGE: 0-200+ // FORECAST IMPACT ASSESSMENT
+                  </p>
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                    <div
+                      class="bg-monitor-card/50 border border-monitor-border/30 rounded-lg p-4"
+                    >
+                      <h4
+                        class="font-bold text-monitor-success font-tech uppercase tracking-wide"
+                      >
+                        0-30: Mostly Quiet
+                      </h4>
+                      <p class="text-sm text-gray-400 font-sans">
+                        Weather day ahead; anything above 20 can still feature a
+                        surprise localized event.
+                      </p>
+                    </div>
+                    <div
+                      class="bg-monitor-card/50 border border-monitor-border/30 rounded-lg p-4"
+                    >
+                      <h4
+                        class="font-bold text-yellow-400 font-tech uppercase tracking-wide"
+                      >
+                        30-60: Some Activity
+                      </h4>
+                      <p class="text-sm text-gray-400 font-sans">
+                        Weather is possible; even intense storms in rural or
+                        small areas can land in this range.
+                      </p>
+                    </div>
+                    <div
+                      class="bg-monitor-card/50 border border-monitor-border/30 rounded-lg p-4"
+                    >
+                      <h4
+                        class="font-bold text-orange-400 font-tech uppercase tracking-wide"
+                      >
+                        60-90: Worth Watching
+                      </h4>
+                      <p class="text-sm text-gray-400 font-sans">
+                        RHY team usually standing by for a live stream.
+                      </p>
+                    </div>
+                    <div
+                      class="bg-monitor-card/50 border border-monitor-border/30 rounded-lg p-4"
+                    >
+                      <h4
+                        class="font-bold text-red-400 font-tech uppercase tracking-wide"
+                      >
+                        90-120: Significant Weather
+                      </h4>
+                      <p class="text-sm text-gray-400 font-sans">
+                        Full-blown live coverage is typically underway.
+                      </p>
+                    </div>
+                    <div
+                      class="bg-monitor-card/50 border border-monitor-border/30 rounded-lg p-4"
+                    >
+                      <h4
+                        class="font-bold text-red-600 font-tech uppercase tracking-wide"
+                      >
+                        120-150: Major Event Expected
+                      </h4>
+                      <p class="text-sm text-gray-400 font-sans">
+                        High-confidence large-scale event is on the way.
+                      </p>
+                    </div>
+                    <div
+                      class="bg-monitor-card/50 border border-monitor-border/30 rounded-lg p-4"
+                    >
+                      <h4
+                        class="font-bold text-purple-500 font-tech uppercase tracking-wide"
+                      >
+                        150-200: Extreme Weather
+                      </h4>
+                      <p class="text-sm text-gray-400 font-sans">
+                        Extreme impacts are expected soon; preparations are
+                        ramping up.
+                      </p>
+                    </div>
+                    <div
+                      class="bg-monitor-card/50 border border-monitor-border/30 rounded-lg p-4"
+                    >
+                      <h4
+                        class="font-bold text-rose-400 font-tech uppercase tracking-wide"
+                      >
+                        200+: Potentially Historic
+                      </h4>
+                      <p class="text-sm text-gray-400 font-sans">
+                        Potentially historic event in the forecast window.
+                      </p>
+                    </div>
+                  </div>
+                  <h3
+                    class="text-xl font-bold mb-3 font-tech uppercase tracking-wide text-white"
+                  >
+                    What Makes the Score Go Up?
+                  </h3>
+                  <div class="space-y-4 mb-6">
+                    <div
+                      class="bg-monitor-bg/50 border border-monitor-border/30 rounded-lg p-4"
+                    >
+                      <h4
+                        class="font-bold text-monitor-active mb-2 font-mono uppercase tracking-wide text-sm"
+                      >
+                        Tropical Weather (Hurricanes)
+                      </h4>
+                      <ul class="text-sm text-gray-400 space-y-1 font-sans">
+                        <li>
+                          • Storm intensity - major hurricanes score higher
+                        </li>
+                        <li>
+                          • Distance to US - closer storms have bigger impact
+                        </li>
+                        <li>
+                          • Population in path - urban areas multiply scores
+                        </li>
+                        <li>• Formation probability for developing systems</li>
+                      </ul>
+                    </div>
+                    <div
+                      class="bg-monitor-bg/50 border border-monitor-border/30 rounded-lg p-4"
+                    >
+                      <h4
+                        class="font-bold text-orange-400 mb-2 font-mono uppercase tracking-wide text-sm"
+                      >
+                        Severe Weather (Tornadoes, Hail, Wind)
+                      </h4>
+                      <ul class="text-sm text-gray-400 space-y-1 font-sans">
+                        <li>
+                          • Risk categories - Enhanced Risk and above trigger
+                          high scores
+                        </li>
+                        <li>
+                          • Significant severe "hatched" areas multiply impact
+                        </li>
+                        <li>
+                          • Population affected - urban areas increase scores
+                        </li>
+                        <li>• Multiple hazards in same area compound</li>
+                      </ul>
+                    </div>
+                    <div
+                      class="bg-monitor-bg/50 border border-monitor-border/30 rounded-lg p-4"
+                    >
+                      <h4
+                        class="font-bold text-cyan-400 mb-2 font-mono uppercase tracking-wide text-sm"
+                      >
+                        Winter Weather
+                      </h4>
+                      <ul class="text-sm text-gray-400 space-y-1 font-sans">
+                        <li>
+                          • Impact severity - extreme impacts score highest
+                        </li>
+                        <li>
+                          • Location matters - Southern/Eastern US scores higher
+                        </li>
+                        <li>• Forecast confidence affects future day scores</li>
+                        <li>
+                          • Area coverage - widespread events score
+                          exponentially
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <h3
+                    class="text-xl font-bold mb-3 font-tech uppercase tracking-wide text-white"
+                  >
+                    Real-World Examples
+                  </h3>
+                  <div class="space-y-4 mb-6">
+                    <div
+                      class="bg-monitor-bg/50 border border-monitor-border/30 rounded-lg p-4"
+                    >
+                      <h4
+                        class="font-bold text-monitor-success font-mono text-sm uppercase"
+                      >
+                        Quiet Day (DOS: 0-30)
+                      </h4>
+                      <ul
+                        class="list-disc list-inside text-sm text-gray-400 space-y-1 font-sans mt-2"
+                      >
+                        <li>Isolated thunderstorms in rural areas</li>
+                        <li>
+                          Minor winter weather in well-prepared mountain regions
+                        </li>
+                        <li>
+                          Tropical wave more than 2,000 miles from the US coast
+                        </li>
+                        <li>
+                          General thunderstorms affecting fewer than one million
+                          people
+                        </li>
+                      </ul>
+                    </div>
+                    <div
+                      class="bg-monitor-bg/50 border border-monitor-border/30 rounded-lg p-4"
+                    >
+                      <h4
+                        class="font-bold text-yellow-400 font-mono text-sm uppercase"
+                      >
+                        Some Activity (DOS: 30-60)
+                      </h4>
+                      <ul
+                        class="list-disc list-inside text-sm text-gray-400 space-y-1 font-sans mt-2"
+                      >
+                        <li>
+                          Scattered severe thunderstorm warnings in sparsely
+                          populated areas
+                        </li>
+                        <li>
+                          Localized flash flooding potential from slow-moving
+                          storms
+                        </li>
+                        <li>
+                          Strong coastal storm clips a small section of
+                          shoreline
+                        </li>
+                        <li>
+                          Tropical storm forming far offshore with limited
+                          immediate impacts
+                        </li>
+                      </ul>
+                    </div>
+                    <div
+                      class="bg-monitor-bg/50 border border-monitor-border/30 rounded-lg p-4"
+                    >
+                      <h4
+                        class="font-bold text-orange-400 font-mono text-sm uppercase"
+                      >
+                        Worth Watching (DOS: 60-90)
+                      </h4>
+                      <ul
+                        class="list-disc list-inside text-sm text-gray-400 space-y-1 font-sans mt-2"
+                      >
+                        <li>
+                          Enhanced Risk severe weather approaching a major metro
+                          area
+                        </li>
+                        <li>
+                          Category 1 hurricane 1,000-1,500 miles from the US
+                          coast
+                        </li>
+                        <li>
+                          Major winter storm forecast to impact multiple
+                          northern states
+                        </li>
+                        <li>
+                          Tropical disturbance with high formation odds near the
+                          Caribbean
+                        </li>
+                      </ul>
+                    </div>
+                    <div
+                      class="bg-monitor-bg/50 border border-monitor-border/30 rounded-lg p-4"
+                    >
+                      <h4
+                        class="font-bold text-red-600 font-mono text-sm uppercase"
+                      >
+                        Major Event Coming (DOS: 120-150)
+                      </h4>
+                      <ul
+                        class="list-disc list-inside text-sm text-gray-400 space-y-1 font-sans mt-2"
+                      >
+                        <li>
+                          High Risk severe weather day – rare and extremely
+                          dangerous
+                        </li>
+                        <li>
+                          Major hurricane (Category 3+) with likely US landfall
+                          within three days
+                        </li>
+                        <li>
+                          Extreme winter impacts forecast for major Eastern
+                          cities
+                        </li>
+                        <li>
+                          Category 4-5 hurricane approaching a populated
+                          coastline
+                        </li>
+                      </ul>
+                    </div>
+                    <div
+                      class="bg-monitor-bg/50 border border-monitor-border/30 rounded-lg p-4"
+                    >
+                      <h4
+                        class="font-bold text-rose-400 font-mono text-sm uppercase"
+                      >
+                        Historic Potential (DOS: 200+)
+                      </h4>
+                      <ul
+                        class="list-disc list-inside text-sm text-gray-400 space-y-1 font-sans mt-2"
+                      >
+                        <li>
+                          Category 5 hurricane bearing down on a major city like
+                          Miami or Houston
+                        </li>
+                        <li>
+                          Historic tornado outbreak rivaling 2011 or 1974 events
+                        </li>
+                        <li>
+                          Catastrophic ice storm targeting unprepared Southern
+                          cities
+                        </li>
+                        <li>
+                          "Perfect storm" scenario with compounding extreme
+                          threats
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <h3
+                    class="text-xl font-bold mb-3 font-tech uppercase tracking-wide text-white"
+                  >
+                    Key Takeaways
+                  </h3>
+                  <ul class="space-y-2 text-gray-300 font-sans">
+                    <li class="flex items-start">
+                      <span class="text-purple-400 mr-2">•</span>DOS is a
+                      "weather importance thermometer" for the entire United
+                      States
+                    </li>
+                    <li class="flex items-start">
+                      <span class="text-purple-400 mr-2">•</span>Scores above 60
+                      typically mean RHY team preparing for active coverage
+                    </li>
+                    <li class="flex items-start">
+                      <span class="text-purple-400 mr-2">•</span>Multiple
+                      factors drive scores: intensity, population impact,
+                      distance, confidence
+                    </li>
+                    <li class="flex items-start">
+                      <span class="text-purple-400 mr-2">•</span>Same weather
+                      scores differently by location (Southern winter storms
+                      score higher)
+                    </li>
+                    <li class="flex items-start">
+                      <span class="text-purple-400 mr-2">•</span>Updates every 5
+                      minutes with new forecast data
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+      <footer
+        class="mt-auto border-t border-monitor-border bg-monitor-bg/95 backdrop-blur-md relative z-10"
+      >
+        <div
+          class="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-monitor-active/30 to-transparent"
+        ></div>
+        <div
+          class="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-5 pointer-events-none"
+        ></div>
+        <div class="container mx-auto px-4 py-8 relative z-10">
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+            <div class="space-y-4">
+              <div class="flex items-center gap-2">
+                <img
+                  src="/EYUMHEADER.png"
+                  alt="Logo"
+                  width="256"
+                  height="64"
+                  class="h-6 w-auto opacity-80"
+                />
+              </div>
+              <p
+                class="text-xs text-gray-500 font-mono leading-relaxed max-w-xs"
+              >
+                // MISSION: PROVIDE ACTIONABLE WEATHER INTELLIGENCE TO THE
+                PUBLIC SECTOR.<br />// STATUS: OPERATIONAL
+              </p>
+              <div class="flex items-center gap-2">
+                <a
+                  href="https://www.youtube.com/@the_eyum_yall"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="p-2 text-gray-500 hover:text-monitor-active hover:bg-monitor-active/10 rounded border border-transparent hover:border-monitor-active/20 transition-all"
+                  title="YouTube"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="lucide lucide-youtube w-5 h-5"
+                  >
+                    <path
+                      d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"
+                    ></path>
+                    <path d="m10 15 5-3-5-3z"></path>
+                  </svg>
+                </a>
+                <a
+                  href="https://x.com/eYuM_Not_MuYe"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="p-2 text-gray-500 hover:text-monitor-active hover:bg-monitor-active/10 rounded border border-transparent hover:border-monitor-active/20 transition-all"
+                  title="X"
+                  ><svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="lucide lucide-twitter w-5 h-5"
+                  >
+                    <path
+                      d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"
+                    ></path>
+                  </svg>
+                </a>
+              </div>
+            </div>
+            <div class="space-y-4">
+              <h3
+                class="text-sm font-bold text-white font-tech uppercase tracking-wider flex items-center gap-2"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-activity w-4 h-4 text-monitor-active"
+                >
+                  <path
+                    d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"
+                  ></path>
+                </svg>
+                Direct Uplinks
+              </h3>
+              <ul class="space-y-2 text-sm font-mono text-gray-400">
+                <li>
+                  <a
+                    href="https://www.theyallsquad.org/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="hover:text-monitor-active flex items-center gap-2 transition-colors"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="lucide lucide-external-link w-3 h-3"
+                    >
+                      <path d="M15 3h6v6"></path>
+                      <path d="M10 14 21 3"></path>
+                      <path
+                        d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"
+                      ></path>
+                    </svg>
+                    The Y'all Squad
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://shopryanhall.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="hover:text-monitor-active flex items-center gap-2 transition-colors"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="lucide lucide-external-link w-3 h-3"
+                    >
+                      <path d="M15 3h6v6"></path>
+                      <path d="M10 14 21 3"></path>
+                      <path
+                        d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"
+                      ></path>
+                    </svg>
+                    Merch Store
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://www.weatherwise.app/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="hover:text-monitor-active flex items-center gap-2 transition-colors"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="lucide lucide-external-link w-3 h-3"
+                    >
+                      <path d="M15 3h6v6"></path>
+                      <path d="M10 14 21 3"></path>
+                      <path
+                        d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"
+                      ></path>
+                    </svg>
+                    WeatherWise Radar
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div class="space-y-4">
+              <h3
+                class="text-sm font-bold text-white font-tech uppercase tracking-wider flex items-center gap-2"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-mail w-4 h-4 text-monitor-active"
+                >
+                  <rect width="20" height="16" x="2" y="4" rx="2"></rect>
+                  <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+                </svg>
+                Comms Array
+              </h3>
+              <ul class="space-y-2 text-sm font-mono text-gray-400">
+                <li>
+                  <a
+                    href="mailto:nathaniel2007w@gmail.com"
+                    class="hover:text-white transition-colors"
+                  >
+                    nathaniel2007w@gmail.com
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div class="space-y-4">
+              <h3
+                class="text-sm font-bold text-white font-tech uppercase tracking-wider flex items-center gap-2"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-shield-check w-4 h-4 text-monitor-active"
+                >
+                  <path
+                    d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"
+                  ></path>
+                  <path d="m9 12 2 2 4-4"></path>
+                </svg>
+                System Protocols
+              </h3>
+              <ul class="space-y-2 text-sm font-mono text-gray-400">
+                <li>
+                  <a class="hover:text-white transition-colors" href="/privacy">
+                    &gt; Privacy Policy
+                  </a>
+                </li>
+                <li>
+                  <a class="hover:text-white transition-colors" href="/terms">
+                    &gt; Terms of Service
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div
+            class="mt-8 pt-4 border-t border-monitor-border/30 flex flex-col md:flex-row items-center justify-between gap-4 text-[10px] font-mono uppercase tracking-widest text-gray-600"
+          >
+            <p>© 2026 eYuM. All rights reserved.</p>
+            <div class="flex items-center gap-4">
+              <span class="flex items-center gap-1.5">
+                <span
+                  class="w-1.5 h-1.5 rounded-full bg-monitor-success animate-pulse"
+                >
+                </span>
+                System Online
+              </span>
+              <span class="flex items-center gap-1.5">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-server w-3 h-3"
+                >
+                  <rect width="20" height="8" x="2" y="2" rx="2" ry="2"></rect>
+                  <rect width="20" height="8" x="2" y="14" rx="2" ry="2"></rect>
+                  <line x1="6" x2="6.01" y1="6" y2="6"></line>
+                  <line x1="6" x2="6.01" y1="18" y2="18"></line>
+                </svg>
+                v2.4.0
+              </span>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+    <script>
+      // Dynamically load code.js with a unique query string to bypass cache
+      (function () {
+        const script = document.createElement("script");
+        script.src = `wis-dos.js?v=${Date.now()}`; // unique URL each load
+        script.type = "text/javascript";
+        script.defer = true; // optional, ensures script runs after HTML is parsed
+
+        // Optional: run a callback after the script loads
+        script.onload = () => console.log("wis-dos.js loaded fresh!");
+
+        document.body.appendChild(script);
+      })();
+    </script>
+  </body>
+</html>

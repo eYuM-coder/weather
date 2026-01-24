@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>404 - Page Not Found</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        background-color: #000000;
+      }
+
+      body {
+        font-family: "Space Grotesk", -apple-system, BlinkMacSystemFont,
+          sans-serif;
+        background: #000000;
+        color: #c0c0c0;
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+        line-height: 1.5;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        overflow: hidden;
+        position: relative;
+      }
+
+      #canvas-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+      }
+
+      .content {
+        position: relative;
+        z-index: 10;
+        text-align: center;
+        padding: 2rem 1.5rem;
+        max-width: 900px;
+        margin: 0 auto;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        pointer-events: none;
+      }
+
+      h1 {
+        font-size: clamp(5rem, 15vw, 10rem);
+        margin: 0 0 0.5rem;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        color: #e0e0e0;
+        font-family: "JetBrains Mono", monospace;
+      }
+
+      .subtitle {
+        font-size: clamp(0.875rem, 2vw, 1rem);
+        color: rgba(255, 255, 255, 0.4);
+        font-weight: 400;
+        margin-bottom: 2rem;
+        font-family: "JetBrains Mono", monospace;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        transition: color 0.1s ease;
+      }
+
+      #message {
+        font-size: clamp(1.125rem, 2.8vw, 1.5rem);
+        color: rgba(255, 255, 255, 0.7);
+        margin: 3rem auto;
+        line-height: 1.6;
+        font-weight: 400;
+        transition: color 0.1s ease;
+      }
+
+      .home-button {
+        display: inline-block;
+        margin-top: 2rem;
+        padding: clamp(0.875rem, 2vw, 1rem) clamp(1.5rem, 3vw, 2rem);
+        background: rgba(255, 255, 255, 0.04);
+        color: #e0e0e0;
+        font-size: clamp(0.875rem, 2vw, 1rem);
+        font-weight: 500;
+        text-decoration: none;
+        border-radius: 32px;
+        transition: background 0.1s ease, transform 0.3s ease, color 0.1s ease;
+        letter-spacing: 0.02em;
+        pointer-events: all;
+      }
+
+      .home-button:hover {
+        background: rgba(255, 255, 255, 0.08);
+        transform: translateY(-2px);
+      }
+
+      .hint {
+        font-size: clamp(0.75rem, 1.8vw, 0.875rem);
+        color: rgba(255, 255, 255, 0.35);
+        margin-top: 2rem;
+        font-family: "JetBrains Mono", monospace;
+        transition: color 0.1s ease;
+      }
+
+      #flashbang {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 253, 208, 0.6);
+        pointer-events: none;
+        z-index: 9999;
+        opacity: 0;
+        display: none;
+      }
+
+      #blackOverlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #000000;
+        pointer-events: none;
+        z-index: 10000;
+        opacity: 0;
+        display: none;
+      }
+
+      .final-screen {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        background: #000000;
+        z-index: 10001;
+      }
+
+      .final-screen.active {
+        display: flex;
+      }
+
+      .final-button {
+        font-family: "Space Grotesk", sans-serif;
+        font-size: clamp(1rem, 2.5vw, 1.5rem);
+        color: rgba(255, 255, 255, 0.7);
+        text-decoration: none;
+        padding: clamp(0.875rem, 2vw, 1rem) clamp(1.5rem, 3vw, 2rem);
+        background: rgba(255, 255, 255, 0.04);
+        border-radius: 32px;
+        transition: all 0.3s ease;
+        opacity: 0;
+      }
+
+      .final-button:hover {
+        background: rgba(255, 255, 255, 0.08);
+        transform: translateY(-2px);
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          animation-duration: 0.01ms !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="flashbang"></div>
+    <div id="blackOverlay"></div>
+    <div id="canvas-container"></div>
+
+    <div class="content">
+      <h1 id="title404">404</h1>
+      <div class="subtitle" id="subtitle">Page Not Found</div>
+
+      <p id="message">Loading weather wisdom…</p>
+
+      <a href="/" class="home-button" id="homeBtn">Return Home</a>
+
+      <p class="hint" id="hint">
+        Click anywhere to spawn falling objects. THERE ARE A LOT OF EASTER EGGS.
+        TYPE RGB TO BEGIN!
+      </p>
+    </div>
+
+    <div class="final-screen" id="finalScreen">
+      <a href="/" class="final-button">go home.</a>
+    </div>
+
+    <script>
+      const messages = [
+        "Even the best forecasters miss sometimes. This page… does not exist.",
+        "You've wandered outside the cone of uncertainty.",
+        "This page dissolved like a weak thunderstorm.",
+        "Radar returns show… nothing here.",
+        "Forecast: 0% chance this page exists.",
+        "You went off the map — literally.",
+        "This page is missing faster than a dryline mixes out.",
+        "You've discovered a Meteorological Mystery.",
+        "Much like pop-up storms… this page wasn't in the forecast.",
+        "This link is weaker than a landfalling Category 1.",
+        "404: This page downgraded to a tropical remnant.",
+        "Even the models didn't predict you'd end up here.",
+        "This page has vanished into the outflow boundary.",
+      ];
+
+      const spawnSounds = ["/1.mp3", "/2.mp3", "/3.mp3", "/4.mp3", "/5.mp3"];
+
+      function playSound(soundFile, randomizePitch = false) {
+        const audio = new Audio(soundFile);
+        audio.volume = 0.5;
+        if (randomizePitch) {
+          audio.preservesPitch = false;
+          audio.playbackRate = 0.7 + Math.random() * 1.3;
+        }
+        audio.play().catch(() => {});
+      }
+      document.getElementById("message").textContent =
+        messages[Math.floor(Math.random() * messages.length)];
+
+      const Engine = Matter.Engine,
+        Render = Matter.Render,
+        Runner = Matter.Runner,
+        Bodies = Matter.Bodies,
+        Composite = Matter.Composite,
+        Mouse = Matter.Mouse,
+        MouseConstraint = Matter.MouseConstraint,
+        Events = Matter.Events;
+
+      const engine = Engine.create();
+      engine.gravity.y = 1;
+
+      const render = Render.create({
+        element: document.getElementById("canvas-container"),
+        engine: engine,
+        options: {
+          width: window.innerWidth,
+          height: window.innerHeight,
+          wireframes: false,
+          background: "transparent",
+        },
+      });
+
+      const ground = Bodies.rectangle(
+        window.innerWidth / 2,
+        window.innerHeight + 25,
+        window.innerWidth,
+        50,
+        {
+          isStatic: true,
+          render: { fillStyle: "rgba(255, 255, 255, 0.05)" },
+        }
+      );
+
+      const leftWall = Bodies.rectangle(
+        -25,
+        window.innerHeight / 2,
+        50,
+        window.innerHeight,
+        {
+          isStatic: true,
+          render: { fillStyle: "rgba(255, 255, 255, 0.05)" },
+        }
+      );
+
+      const rightWall = Bodies.rectangle(
+        window.innerWidth + 25,
+        window.innerHeight / 2,
+        50,
+        window.innerHeight,
+        {
+          isStatic: true,
+          render: { fillStyle: "rgba(255, 255, 255, 0.05)" },
+        }
+      );
+
+      const homeBtn = document.getElementById("homeBtn");
+      const btnRect = homeBtn.getBoundingClientRect();
+      const btnCenterX = btnRect.left + btnRect.width / 2;
+      const btnCenterY = btnRect.top + btnRect.height / 2;
+
+      const bouncyButton = Bodies.rectangle(
+        btnCenterX,
+        btnCenterY,
+        btnRect.width,
+        btnRect.height,
+        {
+          isStatic: true,
+          restitution: 2.5,
+          render: { visible: false },
+        }
+      );
+
+      Composite.add(engine.world, [ground, leftWall, rightWall, bouncyButton]);
+
+      const colors = [
+        "#1565c0",
+        "#c62828",
+        "#2e7d32",
+        "#f57c00",
+        "#6a1b9a",
+        "#00838f",
+      ];
+
+      let rgbMode = false;
+      let hue = 0;
+      const bodyOriginalColors = new Map();
+
+      function getColor() {
+        if (rgbMode) {
+          return `hsl(${hue}, 100%, 50%)`;
+        }
+        return colors[Math.floor(Math.random() * colors.length)];
+      }
+
+      function createRandomBox(x, y) {
+        const width = Math.random() * 60 + 20;
+        const height = Math.random() * 80 + 30;
+        const color = getColor();
+        const angle = Math.random() * Math.PI * 2;
+
+        const box = Bodies.rectangle(x, y, width, height, {
+          restitution: 0.6,
+          friction: 0.3,
+          angle: angle,
+          render: {
+            fillStyle: color,
+            strokeStyle: "rgba(255, 255, 255, 0.2)",
+            lineWidth: 2,
+          },
+        });
+
+        if (!rgbMode) {
+          bodyOriginalColors.set(box.id, color);
+        }
+
+        Matter.Body.setAngularVelocity(box, (Math.random() - 0.5) * 0.2);
+
+        return box;
+      }
+
+      function createRandomCircle(x, y) {
+        const radius = Math.random() * 30 + 10;
+        const color = getColor();
+
+        const circle = Bodies.circle(x, y, radius, {
+          restitution: 0.8,
+          friction: 0.1,
+          render: {
+            fillStyle: color,
+            strokeStyle: "rgba(255, 255, 255, 0.2)",
+            lineWidth: 2,
+          },
+        });
+
+        if (!rgbMode) {
+          bodyOriginalColors.set(circle.id, color);
+        }
+
+        return circle;
+      }
+
+      function createRandomTriangle(x, y) {
+        const size = Math.random() * 40 + 25;
+        const color = getColor();
+        const angle = Math.random() * Math.PI * 2;
+
+        const triangle = Bodies.polygon(x, y, 3, size, {
+          restitution: 0.7,
+          friction: 0.2,
+          angle: angle,
+          render: {
+            fillStyle: color,
+            strokeStyle: "rgba(255, 255, 255, 0.2)",
+            lineWidth: 2,
+          },
+        });
+
+        if (!rgbMode) {
+          bodyOriginalColors.set(triangle.id, color);
+        }
+
+        Matter.Body.setAngularVelocity(triangle, (Math.random() - 0.5) * 0.2);
+
+        return triangle;
+      }
+
+      function createRandomPentagon(x, y) {
+        const size = Math.random() * 35 + 20;
+        const color = getColor();
+        const angle = Math.random() * Math.PI * 2;
+
+        const pentagon = Bodies.polygon(x, y, 5, size, {
+          restitution: 0.65,
+          friction: 0.25,
+          angle: angle,
+          render: {
+            fillStyle: color,
+            strokeStyle: "rgba(255, 255, 255, 0.2)",
+            lineWidth: 2,
+          },
+        });
+
+        if (!rgbMode) {
+          bodyOriginalColors.set(pentagon.id, color);
+        }
+
+        Matter.Body.setAngularVelocity(pentagon, (Math.random() - 0.5) * 0.2);
+
+        return pentagon;
+      }
+
+      function createRandomHexagon(x, y) {
+        const size = Math.random() * 35 + 20;
+        const color = getColor();
+        const angle = Math.random() * Math.PI * 2;
+
+        const hexagon = Bodies.polygon(x, y, 6, size, {
+          restitution: 0.7,
+          friction: 0.2,
+          angle: angle,
+          render: {
+            fillStyle: color,
+            strokeStyle: "rgba(255, 255, 255, 0.2)",
+            lineWidth: 2,
+          },
+        });
+
+        if (!rgbMode) {
+          bodyOriginalColors.set(hexagon.id, color);
+        }
+
+        Matter.Body.setAngularVelocity(hexagon, (Math.random() - 0.5) * 0.2);
+
+        return hexagon;
+      }
+
+      function spawnRandomObject() {
+        const x = Math.random() * window.innerWidth;
+        const y = -100;
+        const shapeType = Math.random();
+
+        let obj;
+        if (shapeType < 0.2) {
+          obj = createRandomBox(x, y);
+        } else if (shapeType < 0.4) {
+          obj = createRandomCircle(x, y);
+        } else if (shapeType < 0.6) {
+          obj = createRandomTriangle(x, y);
+        } else if (shapeType < 0.8) {
+          obj = createRandomPentagon(x, y);
+        } else {
+          obj = createRandomHexagon(x, y);
+        }
+
+        Composite.add(engine.world, obj);
+      }
+
+      for (let i = 0; i < 15; i++) {
+        setTimeout(() => {
+          spawnRandomObject();
+        }, i * 200);
+      }
+
+      setInterval(() => {
+        spawnRandomObject();
+      }, 800);
+
+      const mouse = Mouse.create(render.canvas);
+      const mouseConstraint = MouseConstraint.create(engine, {
+        mouse: mouse,
+        constraint: {
+          stiffness: 0.2,
+          render: { visible: false },
+        },
+      });
+
+      Composite.add(engine.world, mouseConstraint);
+
+      Events.on(mouseConstraint, "mousedown", function (event) {
+        playSound("/mousedown.mp3");
+
+        if (mouseConstraint.body) {
+          return;
+        }
+
+        const shapeType = Math.random();
+        let obj;
+
+        if (shapeType < 0.2) {
+          obj = createRandomBox(event.mouse.position.x, event.mouse.position.y);
+        } else if (shapeType < 0.4) {
+          obj = createRandomCircle(
+            event.mouse.position.x,
+            event.mouse.position.y
+          );
+        } else if (shapeType < 0.6) {
+          obj = createRandomTriangle(
+            event.mouse.position.x,
+            event.mouse.position.y
+          );
+        } else if (shapeType < 0.8) {
+          obj = createRandomPentagon(
+            event.mouse.position.x,
+            event.mouse.position.y
+          );
+        } else {
+          obj = createRandomHexagon(
+            event.mouse.position.x,
+            event.mouse.position.y
+          );
+        }
+
+        const randomSound =
+          spawnSounds[Math.floor(Math.random() * spawnSounds.length)];
+        playSound(randomSound, true);
+
+        Composite.add(engine.world, obj);
+      });
+
+      Events.on(mouseConstraint, "mouseup", function () {
+        playSound("/mouseup.mp3");
+      });
+
+      Render.run(render);
+      const runner = Runner.create();
+      Runner.run(runner, engine);
+
+      let keySequence = "";
+      let keyTimeout;
+      let exploding = false;
+      let ePressed = false;
+      let eSpawnInterval = null;
+      let eStartAudio = null;
+      let eRunningAudio = null;
+      let eEndAudio = null;
+      let eCanRelease = false;
+      let eMinTimeElapsed = false;
+      let bopAudio = null;
+
+      const COUNTDOWN_TIME = 1744;
+      document.addEventListener("keydown", (e) => {
+        if (exploding) return;
+        if (ePressed) return;
+
+        const key = e.key.toLowerCase();
+        const codes = ["rgb", "big", "dump", "boom", "fart", "ohno", "bop"];
+
+        let testSequence = keySequence + key;
+
+        const couldBeValid = codes.some((code) => {
+          for (let len = 1; len <= Math.min(4, testSequence.length); len++) {
+            const slice = testSequence.slice(-len);
+            if (code.startsWith(slice)) {
+              return true;
+            }
+          }
+          return false;
+        });
+
+        if (couldBeValid) {
+          keySequence = testSequence;
+        } else {
+          const keyStartsCode = codes.some((code) => code.startsWith(key));
+          if (keyStartsCode) {
+            keySequence = key;
+          } else {
+            keySequence = "";
+          }
+        }
+
+        if (keySequence.length > 4) {
+          keySequence = keySequence.slice(-4);
+        }
+
+        if (keySequence === "rgb") {
+          rgbMode = !rgbMode;
+          keySequence = "";
+        }
+
+        if (keySequence === "big") {
+          playSound("/fat.mp3", true);
+          const bigCircle = Bodies.circle(
+            Math.random() * window.innerWidth,
+            -150,
+            150,
+            {
+              restitution: 0.1,
+              friction: 0.8,
+              density: 0.1,
+              render: {
+                fillStyle: getColor(),
+                strokeStyle: "rgba(255, 255, 255, 0.2)",
+                lineWidth: 3,
+              },
+            }
+          );
+          if (!rgbMode) {
+            bodyOriginalColors.set(bigCircle.id, bigCircle.render.fillStyle);
+          }
+          Composite.add(engine.world, bigCircle);
+          keySequence = "";
+        }
+
+        if (keySequence === "bop") {
+          bopAudio = new Audio("/xeno.flac");
+          bopAudio.volume = 0.5;
+          bopAudio.preservesPitch = false;
+          bopAudio.play().catch(() => {});
+          keySequence = "";
+        }
+
+        if (keySequence === "dump") {
+          keySequence = "";
+          Composite.remove(engine.world, [leftWall, rightWall, ground]);
+          setTimeout(() => {
+            Composite.add(engine.world, [ground, leftWall, rightWall]);
+            const bodiesToRemove = [];
+            const allBodies = Composite.allBodies(engine.world);
+            const groundY = window.innerHeight + 25;
+            allBodies.forEach((body) => {
+              if (!body.isStatic && body.position.y > groundY) {
+                bodiesToRemove.push(body);
+              }
+            });
+            Composite.remove(engine.world, bodiesToRemove);
+          }, 10000);
+        }
+
+        if (
+          keySequence.endsWith("boom") ||
+          keySequence.endsWith("fart") ||
+          keySequence.endsWith("ohno")
+        ) {
+          exploding = true;
+          keySequence = "";
+          if (bopAudio && !bopAudio.paused) {
+            const fadeInterval = setInterval(() => {
+              if (bopAudio.volume > 0.24) {
+                bopAudio.volume = Math.max(0.24, bopAudio.volume - 0.02);
+              } else {
+                clearInterval(fadeInterval);
+              }
+            }, 50);
+          }
+
+          const audio = new Audio("/newboom.mp3");
+          audio.play().catch(() => {});
+
+          for (let i = 0; i < 169; i++) {
+            setTimeout(() => {
+              spawnRandomObject();
+            }, Math.random() * COUNTDOWN_TIME);
+          }
+
+          const targetX = window.innerWidth / 2;
+          const targetY = window.innerHeight * 0.8;
+
+          const pullInterval = setInterval(() => {
+            const allBodies = Composite.allBodies(engine.world);
+            allBodies.forEach((body) => {
+              if (!body.isStatic) {
+                const dx = targetX - body.position.x;
+                const dy = targetY - body.position.y;
+                const pullStrength = 0.0008;
+
+                Matter.Body.applyForce(body, body.position, {
+                  x: dx * pullStrength,
+                  y: dy * pullStrength,
+                });
+              }
+            });
+          }, 16);
+
+          setTimeout(() => {
+            clearInterval(pullInterval);
+
+            const flashbang = document.getElementById("flashbang");
+            flashbang.style.display = "block";
+            flashbang.style.opacity = "1";
+
+            let flashOpacity = 1;
+            const flashFade = setInterval(() => {
+              flashOpacity -= 0.016;
+              if (flashOpacity <= 0) {
+                flashOpacity = 0;
+                clearInterval(flashFade);
+                flashbang.style.display = "none";
+              }
+              flashbang.style.opacity = flashOpacity.toString();
+            }, 100);
+
+            Composite.remove(engine.world, [leftWall, rightWall]);
+
+            const allBodies = Composite.allBodies(engine.world);
+            allBodies.forEach((body) => {
+              if (!body.isStatic) {
+                const forceMagnitude = 3.0;
+                const randomAngle = (Math.random() - 0.5) * 0.3;
+                const upwardAngle = -Math.PI / 2 + randomAngle;
+
+                Matter.Body.applyForce(body, body.position, {
+                  x: Math.cos(upwardAngle) * forceMagnitude,
+                  y: Math.sin(upwardAngle) * forceMagnitude,
+                });
+              }
+            });
+
+            const fadeDelay = 8500 - COUNTDOWN_TIME;
+
+            setTimeout(() => {
+              const blackOverlay = document.getElementById("blackOverlay");
+              blackOverlay.style.display = "block";
+              blackOverlay.style.opacity = "0";
+
+              let blackOpacity = 0;
+              const blackFade = setInterval(() => {
+                blackOpacity += 0.01;
+                if (blackOpacity >= 1) {
+                  blackOpacity = 1;
+                  clearInterval(blackFade);
+                }
+                blackOverlay.style.opacity = blackOpacity.toString();
+              }, 15);
+
+              setTimeout(() => {
+                document.getElementById("finalScreen").classList.add("active");
+                if (bopAudio && !bopAudio.paused) {
+                  const stopInterval = setInterval(() => {
+                    if (bopAudio.volume > 0.01) {
+                      bopAudio.volume = Math.max(0, bopAudio.volume - 0.02);
+                    } else {
+                      bopAudio.pause();
+                      bopAudio = null;
+                      clearInterval(stopInterval);
+                    }
+                  }, 50);
+                }
+                setTimeout(() => {
+                  const finalButton = document.querySelector(".final-button");
+                  let buttonOpacity = 0;
+                  const buttonFade = setInterval(() => {
+                    buttonOpacity += 0.02;
+                    if (buttonOpacity >= 1) {
+                      buttonOpacity = 1;
+                      clearInterval(buttonFade);
+                    }
+                    finalButton.style.opacity = buttonOpacity.toString();
+                  }, 20);
+                }, 500);
+
+                let finalKeySequence = "";
+                let finalKeyTimeout;
+                let rickrollActivated = false;
+
+                const finalKeyHandler = (e) => {
+                  if (rickrollActivated) return;
+
+                  const key = e.key.toLowerCase();
+
+                  clearTimeout(finalKeyTimeout);
+
+                  finalKeySequence += key;
+
+                  if (finalKeySequence.length > 2) {
+                    finalKeySequence = finalKeySequence.slice(-2);
+                  }
+
+                  if (finalKeySequence === "no") {
+                    rickrollActivated = true;
+                    const finalButton = document.querySelector(".final-button");
+                    finalButton.innerHTML =
+                      "fair enough.<br>click me to have more fun!";
+                    finalButton.style.textAlign = "center";
+                    finalButton.style.lineHeight = "1.4";
+
+                    finalButton.onclick = (e) => {
+                      e.preventDefault();
+                      const audio = new Audio("/buildup.mp3");
+                      audio.play().catch(() => {});
+
+                      audio.addEventListener("ended", () => {
+                        window.location.href =
+                          "https://rickroll.it/rickroll.mp4";
+                      });
+
+                      return false;
+                    };
+                  }
+
+                  finalKeyTimeout = setTimeout(() => {
+                    finalKeySequence = "";
+                  }, 4000);
+                };
+
+                document.addEventListener("keydown", finalKeyHandler);
+              }, 1500);
+            }, fadeDelay);
+          }, COUNTDOWN_TIME);
+        }
+      });
+
+      document.addEventListener("keydown", (e) => {
+        if (e.key.toLowerCase() === "e" && !ePressed && !exploding) {
+          ePressed = true;
+          eCanRelease = true;
+          eMinTimeElapsed = false;
+
+          eStartAudio = new Audio("/start.mp3");
+          eStartAudio.play().catch(() => {});
+
+          setTimeout(() => {
+            if (ePressed) {
+              eRunningAudio = new Audio("/running.mp3");
+              eRunningAudio.loop = true;
+              eRunningAudio.play().catch(() => {});
+
+              eSpawnInterval = setInterval(() => {
+                spawnRandomObject();
+              }, 1000 / 69);
+
+              eMinTimeElapsed = true;
+            } else {
+              ePressed = false;
+
+              if (eSpawnInterval) {
+                clearInterval(eSpawnInterval);
+                eSpawnInterval = null;
+              }
+
+              if (eRunningAudio) {
+                eRunningAudio.pause();
+                eRunningAudio.currentTime = 0;
+                eRunningAudio = null;
+              }
+
+              eEndAudio = new Audio("/end.mp3");
+              eEndAudio.play().catch(() => {});
+            }
+          }, 889.66);
+        }
+      });
+
+      document.addEventListener("keyup", (e) => {
+        if (e.key.toLowerCase() === "e" && ePressed) {
+          if (eCanRelease && !eSpawnInterval) {
+            ePressed = false;
+            return;
+          }
+
+          ePressed = false;
+
+          if (eSpawnInterval) {
+            clearInterval(eSpawnInterval);
+            eSpawnInterval = null;
+          }
+
+          if (eRunningAudio) {
+            eRunningAudio.pause();
+            eRunningAudio.currentTime = 0;
+            eRunningAudio = null;
+          }
+
+          eEndAudio = new Audio("/end.mp3");
+          eEndAudio.play().catch(() => {});
+        }
+      });
+
+      function updateRGB() {
+        if (rgbMode) {
+          hue = (hue + 2) % 360;
+
+          const rgbColor = `hsl(${hue}, 100%, 50%)`;
+
+          const title = document.getElementById("title404");
+          const subtitle = document.getElementById("subtitle");
+          const message = document.getElementById("message");
+          const hint = document.getElementById("hint");
+          const homeBtn = document.getElementById("homeBtn");
+
+          if (title) title.style.color = rgbColor;
+          if (subtitle) subtitle.style.color = `hsl(${hue}, 80%, 60%)`;
+          if (message) message.style.color = `hsl(${hue}, 90%, 70%)`;
+          if (hint) hint.style.color = `hsl(${hue}, 70%, 50%)`;
+          if (homeBtn) {
+            homeBtn.style.color = rgbColor;
+            homeBtn.style.background = `hsla(${hue}, 100%, 50%, 0.1)`;
+          }
+
+          const allBodies = Composite.allBodies(engine.world);
+          allBodies.forEach((body) => {
+            if (!body.isStatic && body.render.fillStyle) {
+              const bodyHue = (hue + ((body.id * 37) % 360)) % 360;
+              body.render.fillStyle = `hsl(${bodyHue}, 100%, 50%)`;
+            }
+          });
+        } else {
+          const title = document.getElementById("title404");
+          const subtitle = document.getElementById("subtitle");
+          const message = document.getElementById("message");
+          const hint = document.getElementById("hint");
+          const homeBtn = document.getElementById("homeBtn");
+
+          if (title) title.style.color = "#e0e0e0";
+          if (subtitle) subtitle.style.color = "rgba(255, 255, 255, 0.4)";
+          if (message) message.style.color = "rgba(255, 255, 255, 0.7)";
+          if (hint) hint.style.color = "rgba(255, 255, 255, 0.35)";
+          if (homeBtn) {
+            homeBtn.style.color = "#e0e0e0";
+            homeBtn.style.background = "rgba(255, 255, 255, 0.04)";
+          }
+
+          const allBodies = Composite.allBodies(engine.world);
+          allBodies.forEach((body) => {
+            if (!body.isStatic && bodyOriginalColors.has(body.id)) {
+              body.render.fillStyle = bodyOriginalColors.get(body.id);
+            }
+          });
+        }
+
+        requestAnimationFrame(updateRGB);
+      }
+
+      updateRGB();
+
+      window.addEventListener("resize", () => {
+        render.canvas.width = window.innerWidth;
+        render.canvas.height = window.innerHeight;
+
+        Matter.Body.setPosition(ground, {
+          x: window.innerWidth / 2,
+          y: window.innerHeight + 25,
+        });
+        Matter.Body.setPosition(rightWall, {
+          x: window.innerWidth + 25,
+          y: window.innerHeight / 2,
+        });
+
+        const newBtnRect = homeBtn.getBoundingClientRect();
+        Matter.Body.setPosition(bouncyButton, {
+          x: newBtnRect.left + newBtnRect.width / 2,
+          y: newBtnRect.top + newBtnRect.height / 2,
+        });
+      });
+    </script>
+  </body>
+</html>

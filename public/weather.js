@@ -97,7 +97,7 @@ async function updateWISThreshold() {
     `https://quiet-wood-94aa.nathaniel2007w.workers.dev?t=${new Date().getTime()}`,
   );
   const threshold_data = await threshold.json();
-  STREAM_THRESHOLDS.ACTIVE = threshold_data.thresholds.ACTIVE;
+  STREAM_THRESHOLDS.ACTIVE = threshold_data.thresholds?.ACTIVE;
 }
 
 async function updateTimestamp() {

@@ -102,7 +102,7 @@ async function updateWISThreshold() {
 
 async function updateTimestamp() {
   const span = document.getElementById("last-updated-timestamp");
-  const now = new Date.now();
+  const now = Date.now();
 
   const formatted = new Intl.DateTimeFormat([], {
     hour: "numeric",

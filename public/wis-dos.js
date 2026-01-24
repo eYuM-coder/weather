@@ -979,8 +979,8 @@ async function updateWeatherIntensity() {
     `https://quiet-wood-94aa.nathaniel2007w.workers.dev?t=${new Date().getTime()}`,
   );
   const threshold_data = await threshold.json();
-  STREAM_THRESHOLDS.STANDBY = threshold_data.thresholds.STANDBY;
-  STREAM_THRESHOLDS.ACTIVE = threshold_data.thresholds.ACTIVE;
+  STREAM_THRESHOLDS.STANDBY = threshold_data.thresholds?.STANDBY;
+  STREAM_THRESHOLDS.ACTIVE = threshold_data.thresholds?.ACTIVE;
 
   weather_intensity_score = data.wis.weather_intensity_score;
   // Grab full score history from API

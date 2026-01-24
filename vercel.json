@@ -8,6 +8,6 @@
     {"source": "/whats-next", "destination": "/whats-next.html"},
     {"source": "/zulu", "destination": "/zulu.html"},
     {"source": "/submit", "destination": "/submit.html"},
-    {"source": "/about", "destination": "/about.html"},
+    {"source": "/about", "destination": "/about.html"}
   ]
 }

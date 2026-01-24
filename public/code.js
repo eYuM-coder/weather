@@ -2541,9 +2541,9 @@ async function showLatestContent() {
   }
 
   let prefix;
-  if (currentlyLive.liveStreamingDetails.actualStartTime) {
+  if (currentlyLive?.liveStreamingDetails?.actualStartTime) {
     prefix = "Started streaming ";
-  } else if (currentlyLive.liveStreamingDetails.scheduledStartTime) {
+  } else if (currentlyLive?.liveStreamingDetails?.scheduledStartTime) {
     prefix = "Stream ";
   } else {
     prefix = "Streamed ";

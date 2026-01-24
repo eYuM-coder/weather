@@ -1680,12 +1680,12 @@ async function updateWeatherIntensity() {
 
   WISData = data;
   const threshold = await fetch(
-    `https://serenia.eyum.dev/api/thresholds?t=${new Date().getTime()}`,
+    `https://quiet-wood-94aa.nathaniel2007w.workers.dev?t=${new Date().getTime()}`,
   );
   const threshold_data = await threshold.json();
-  STREAM_THRESHOLDS.STANDBY = threshold_data.thresholds.STANDBY;
-  STREAM_THRESHOLDS.ACTIVE = threshold_data.thresholds.ACTIVE;
-  STREAM_THRESHOLDS.EMERGENCY = threshold_data.thresholds.EMERGENCY;
+  STREAM_THRESHOLDS.STANDBY = threshold_data.thresholds?.STANDBY;
+  STREAM_THRESHOLDS.ACTIVE = threshold_data.thresholds?.ACTIVE;
+  STREAM_THRESHOLDS.EMERGENCY = threshold_data.thresholds?.EMERGENCY;
   thresholdRoast(STREAM_THRESHOLDS.ACTIVE);
 
   weather_intensity_score = data.wis.weather_intensity_score;

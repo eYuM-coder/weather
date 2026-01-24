@@ -102,16 +102,15 @@ async function updateWISThreshold() {
 
 async function updateTimestamp() {
   const span = document.getElementById("last-updated-timestamp");
-  const res = await fetch("/time");
-  const data = await res.json();
+  const now = new Date.now();
 
   const formatted = new Intl.DateTimeFormat([], {
     hour: "numeric",
     minute: "2-digit",
     hour12: true,
     timeZoneName: "short",
-    timeZone: data.timezone,
-  }).format(data.timestamp);
+    timeZone: "America/New_York",
+  }).format(now);
 
   span.textContent = `UPDATED: ${formatted}`;
 }

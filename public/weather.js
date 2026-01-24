@@ -94,7 +94,7 @@ refreshButton.addEventListener("click", () => {
 
 async function updateWISThreshold() {
   const threshold = await fetch(
-    `https://serenia.eyum.dev/api/thresholds?t=${new Date().getTime()}`,
+    `https://quiet-wood-94aa.nathaniel2007w.workers.dev?t=${new Date().getTime()}`,
   );
   const threshold_data = await threshold.json();
   STREAM_THRESHOLDS.ACTIVE = threshold_data.thresholds.ACTIVE;

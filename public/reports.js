@@ -455,11 +455,11 @@ function renderReportCard(report, index = 1) {
         <div class="grid grid-cols-3 gap-2">
           <div class="bg-black/30 rounded border border-white/5 p-1.5 text-center">
             <p class="text-[9px] uppercase font-tech tracking-wider text-gray-500">Score</p>
-            <p class="font-bold text-sm font-mono" style="color: ${hexToRgba(colors?.dark)}">${report.score.toFixed(2)}</p>
+            <p class="font-bold text-sm font-mono" style="color: ${hexToRgba(colors?.dark)}">${report.score.toFixed(1)}</p>
           </div>
           <div class="bg-black/30 rounded border border-white/5 p-1.5 text-center">
             <p class="text-[9px] uppercase font-tech tracking-wider text-gray-500">Raw</p>
-            <p class="font-bold text-sm font-mono text-white/80">${report.raw_score.toFixed(2)}</p>
+            <p class="font-bold text-sm font-mono text-white/80">${report.raw_score.toFixed(1)}</p>
           </div>
           <div class="bg-black/30 rounded border border-white/5 p-1.5 text-center">
             <p class="text-[9px] uppercase font-tech tracking-wider text-gray-500">Decay</p>

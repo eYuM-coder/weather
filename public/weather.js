@@ -820,6 +820,12 @@ function getReportIcon(code) {
   }
 }
 
+function getReportTime(report) {
+  let s = report.age_hours;
+
+  return s < 1 ? `${Math.round(s * 60)}m ago` : s<24 ? `${s.toFixed(1)}h ago` : `${Math.floor(s / 24)}d ago`
+}
+
 function renderReportCard(report, index = 1) {
   const colors = getReportColor(report.event_code);
   const icon = getReportIcon(report.event_code);
@@ -827,6 +833,8 @@ function renderReportCard(report, index = 1) {
   const gradientA = hexToRgba(colors?.main || "#ffffff", 0.125);
   const gradientB = hexToRgba(colors?.dark || "#000000", 0.063);
   const borderCol = hexToRgba(colors?.main || "#ffffff", 0.314);
+
+  const timeAgo = getReportTime(report);
 
   return `
     <a
@@ -836,9 +844,33 @@ function renderReportCard(report, index = 1) {
       style="background-image: linear-gradient(135deg, ${gradientA}, ${gradientB}); border-color: ${borderCol}"
     >
       <div class="relative flex items-start gap-2 text-sm text-zinc-100 pr-16">
-        <span class="text-xs font-bold font-mono text-gray-500">${String(index).padStart(2, "0")}</span>
-        <span style="${hexToRgba(colors?.main || "#ffffff")}">${icon}</span>
+        <span class="text-xs font-bold font-mono text-gray-500">#${String(index).padStart(2, "0")}</span>
+        <span style="color: ${hexToRgba(colors?.main || "#ffffff")};">${icon}</span>
         <p class="flex-1 font-semibold leading-tight text-sm text-white line-clamp-2 font-tech tracking-wide">${report.event_type}</p>
+        <span class="absolute top-0 right-0 text-[9px] uppercase tracking-widest rounded-sm px-1.5 py-0.5 border whitespace-nowrap font-mono font-bold" style="background-color: ${hexToRgba(colors?.main, 0.19)}; border-color: ${borderCol}; color: ${hexToRgba(colors?.main)}">${report.magnitude} ${report.unit}</span>
+      </div>
+      <div class="mt-3 flex items-center justify-between text-xs text-gray-400 font-mono">
+        <span class="flex items-center gap-1">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-map-pin h-3 w-3"
+          >
+            <path
+              d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"
+            ></path>
+            <circle cx="12" cy="10" r="3"></circle>
+          </svg>
+          ${report.location}, ${report.state}
+        </span>
+        <span class="font-semibold" style="color: ${hexToRgba(colors?.main)};">${timeAgo}</span>
       </div>
     </a>
   `;

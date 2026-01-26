@@ -522,12 +522,12 @@ async function fetchTopReports() {
   const data = await res.json();
 
   if (lastReports.length === 0) {
-    renderAllCards(data);
+    renderAllCards(data.reports);
   } else {
-    updateChangedCards(lastReports, data);
+    updateChangedCards(lastReports, data.reports);
   }
 
-  lastReports = data;
+  lastReports = data.reports;
 }
 
 function updateAllTimers() {

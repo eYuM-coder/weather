@@ -428,7 +428,7 @@ function renderReportCard(report, index = 1) {
             class="text-sm font-bold font-mono"
             style="color: ${colors?.main || void 0}"
           >
-            ${report.magnitude} ${report.unit}
+            ${report.magnitude} ${report.unit.toLowerCase()}
           </div>
         </div>
         <div class="flex items-center justify-between font-mono text-[10px] md:text-xs uppercase tracking-wide">
@@ -471,7 +471,6 @@ function renderAllCards(data) {
   topReports.innerHTML = data
     .map((r, i) => renderReportCard(r, i + 1))
     .join("");
-  applyButtonHoverEffects();
 }
 
 function updateChangedCards(oldData, newData) {

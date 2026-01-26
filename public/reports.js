@@ -319,10 +319,10 @@ function formatNumber(num) {
 }
 
 function renderReportCard(report, index = 1) {
-  const icon = getReportIcon(report.event_code);
-  const colors = getReportColor(report.event_code);
+  const icon = getReportIcon(report[index - 1].event_code);
+  const colors = getReportColor(report[index - 1].event_code);
 
-  const times = getReportTime(report);
+  const times = getReportTime(report[index - 1]);
 
   return `<div
       class="reportCard rounded-lg border bg-card text-card-foreground shadow-sm relative overflow-hidden transition-all duration-300 hover:scale-[1.005] tech-card"
@@ -363,8 +363,8 @@ function renderReportCard(report, index = 1) {
                 ></path>
                 <circle cx="12" cy="10" r="3"></circle>
               </svg>
-                <span>${report.location}, ${report.state}</span>
-                <span class="text-gray-500">(${report.county_name})</span>
+                <span>${report[index - 1].location}, ${report[index - 1].state}</span>
+                <span class="text-gray-500">(${report[index - 1].county_name})</span>
               </div>
             </div>
           </div>
@@ -374,12 +374,12 @@ function renderReportCard(report, index = 1) {
                 class="text-base md:text-lg font-bold font-mono"
                 style="color: ${colors?.main};"
               >
-                ${report.magnitude} ${report.unit.toLowerCase()}
+                ${report[index - 1].magnitude} ${report[index - 1].unit.toLowerCase()}
               </div>
               <div class="text-[10px] text-gray-500 font-tech uppercase tracking-wider">Magnitude</div>
             </div>
             <a
-              href="https://www.google.com/maps?q=${report.geometry?.coordinates[1]},${report.geometry?.coordinates[0]}"
+              href="https://www.google.com/maps?q=${report[index - 1].geometry?.coordinates[1]},${report[index - 1].geometry?.coordinates[0]}"
               target="_blank"
               rel="noopener noreferrer"
               class="flex items-center gap-2 px-3 py-2 rounded transition-all text-xs font-bold font-mono uppercase tracking-wide border hover:shadow-[0_0_15px_rgba(255,255,255,0.2)] bg-white/10 hover:bg-white/20 text-white border-white/20 hover:border-white/40"
@@ -428,7 +428,7 @@ function renderReportCard(report, index = 1) {
             class="text-sm font-bold font-mono"
             style="color: ${colors?.main || void 0}"
           >
-            ${report.magnitude} ${report.unit.toLowerCase()}
+            ${report[index - 1].magnitude} ${report[index - 1].unit.toLowerCase()}
           </div>
         </div>
         <div class="flex items-center justify-between font-mono text-[10px] md:text-xs uppercase tracking-wide">
@@ -450,12 +450,12 @@ function renderReportCard(report, index = 1) {
           </svg>
             ${times}
           </span>
-          <span class="text-gray-500">${report.time}</span>
+          <span class="text-gray-500">${report[index - 1].time}</span>
         </div>
         <div class="grid grid-cols-3 gap-2">
           <div class="bg-black/30 rounded border border-white/5 p-1.5 text-center">
             <p class="text-[9px] uppercase font-tech tracking-wider text-gray-500">Score</p>
-            <p class="font-bold text-sm font-mono" style="${hexToRgba(colors?.dark)}">${report.score.toFixed(2)}</p>
+            <p class="font-bold text-sm font-mono" style="${hexToRgba(colors?.dark)}">${report[index - 1].score.toFixed(2)}</p>
           </div>
         </div>
       </div>

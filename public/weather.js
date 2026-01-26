@@ -823,7 +823,11 @@ function getReportIcon(code) {
 function getReportTime(report) {
   let s = report.age_hours;
 
-  return s < 1 ? `${Math.round(s * 60)}m ago` : s<24 ? `${s.toFixed(1)}h ago` : `${Math.floor(s / 24)}d ago`
+  return s < 1
+    ? `${Math.round(s * 60)}m ago`
+    : s < 24
+      ? `${s.toFixed(1)}h ago`
+      : `${Math.floor(s / 24)}d ago`;
 }
 
 function renderReportCard(report, index = 1) {
@@ -873,7 +877,7 @@ function renderReportCard(report, index = 1) {
         <span class="font-semibold" style="color: ${hexToRgba(colors?.main)};">${timeAgo}</span>
       </div>
       <div class="mt-2 flex items-center justify-between text-[10px] text-gray-500 font-mono uppercase">
-        <span>${report.source.toUpperCase()}</span>
+        <span>${report.source.toLowerCase() === "measureable" ? "MEASURED" : "OBSERVED"}</span>
         <span class="text-monitor-active group-hover:text-white transition-colors">DETAILS -></span>
       </div>
     </a>

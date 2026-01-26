@@ -2061,6 +2061,7 @@ function startWeatherUI() {
   updateCurrentTopWarnings();
   updateMiniWIS();
   updateScannerCards();
+  updateCurrentTopReports();
 
   // Refresh every 1 minute (same as RHY)
   setInterval(updateBreakingHeadlines, 60000);
@@ -2069,6 +2070,7 @@ function startWeatherUI() {
     updateCurrentTopWarnings();
     updateMiniWIS();
     updateScannerCards();
+    updateCurrentTopReports();
   }, 10000);
 }
 

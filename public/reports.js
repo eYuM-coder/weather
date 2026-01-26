@@ -428,7 +428,7 @@ function renderReportCard(report, index = 1) {
             class="text-sm font-bold font-mono"
             style="color: ${colors?.main || void 0}"
           >
-            ${report.magnitude} ${report.unit.toLowerCase()}
+            ${report.magnitude} ${report.unit}
           </div>
         </div>
         <div class="flex items-center justify-between font-mono text-[10px] md:text-xs uppercase tracking-wide">

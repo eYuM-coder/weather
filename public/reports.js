@@ -489,12 +489,12 @@ function renderAllCards(data) {
 }
 
 function updateChangedCards(oldData, newData) {
-  newData.forEach((newW, i) => {
-    const oldW = oldData[i];
+  newData.forEach((newR, i) => {
+    const oldR = oldData[i];
 
     // IF NEW WARNING → FULL REPLACE
-    if (!oldW || oldW.id !== newW.id) {
-      replaceCard(newW, i);
+    if (!oldR || oldR !== newR) {
+      replaceCard(newR, i);
       return;
     }
   });

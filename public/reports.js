@@ -450,14 +450,28 @@ function renderReportCard(report, index = 1) {
           </svg>
             ${times}
           </span>
-          <span class="text-gray-500">${report.time}</span>
+          <span class="text-gray-500">${new Date(report.time).toLocaleString()}</span>
         </div>
         <div class="grid grid-cols-3 gap-2">
           <div class="bg-black/30 rounded border border-white/5 p-1.5 text-center">
             <p class="text-[9px] uppercase font-tech tracking-wider text-gray-500">Score</p>
             <p class="font-bold text-sm font-mono" style="${hexToRgba(colors?.dark)}">${report.score.toFixed(2)}</p>
           </div>
+          <div class="bg-black/30 rounded border border-white/5 p-1.5 text-center">
+            <p class="text-[9px] uppercase font-tech tracking-wider text-gray-500">Raw</p>
+            <p class="font-bold text-sm font-mono text-white/80">${report.raw.toFixed(2)}</p>
+          </div>
+          <div class="bg-black/30 rounded border border-white/5 p-1.5 text-center">
+            <p class="text-[9px] uppercase font-tech tracking-wider text-gray-500">Decay</p>
+            <p class="font-bold text-sm font-mono text-white/80">${report.time_factor.toFixed(2)}</p>
+          </div>
         </div>
+        ${
+          report.remarks ??
+          `<div class="mt-2 p-2 bg-black/30 rounded border border-white/5">
+            <p class="text-xs text-gray-300 font-mono">${report.remarks}</p>
+          </div>`
+        }
       </div>
     </div>`;
 }

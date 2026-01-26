@@ -632,6 +632,7 @@ const ICON_CLOCK = `
     <polyline points="12 6 12 12 16 14"></polyline>
   </svg>
 `;
+
 function getIcon(w) {
   const t = w.title.toLowerCase();
 
@@ -753,6 +754,96 @@ function getStateCodes(warning) {
   return unique.join(", ");
 }
 
+function getReportColor(code) {
+  switch (code) {
+    case "T":
+      return {
+        main: "#ef4444",
+        dark: "#dc2626",
+      };
+    case "H":
+      return {
+        main: "#22c55e",
+        dark: "#16a34a",
+      };
+    case "W":
+      return {
+        main: "#f59e0b",
+        dark: "#d97706",
+      };
+    case "N":
+    case "G":
+      return {
+        main: "#3b82f6",
+        dark: "#2563eb",
+      };
+    case "S":
+      return {
+        main: "#a855f7",
+        dark: "#9333ea",
+      };
+    case "Z":
+      return {
+        main: "#06b6d4",
+        dark: "#0891b2",
+      };
+    case "F":
+      return {
+        main: "#14b8a6",
+        dark: "#0d9488",
+      };
+    default:
+      return {
+        main: "#6b7280",
+        dark: "#4b5563",
+      };
+  }
+}
+
+function getReportIcon(code) {
+  switch (code) {
+    case "T":
+      return ICON_TORNADO;
+    case "H":
+      return ICON_SEVERE_TSTM;
+    case "W":
+      return ICON_WIND;
+    case "N":
+    case "G":
+      return ICON_WIND;
+    case "S":
+      return ICON_WINTER;
+    case "F":
+      return ICON_FLOOD;
+    default:
+      return ICON_ALERT;
+  }
+}
+
+function renderReportCard(report, index = 1) {
+  const colors = getReportColor(report.event_code);
+  const icon = getReportIcon(report.event_code);
+
+  const gradientA = hexToRgba(colors?.main || "#ffffff", 0.125);
+  const gradientB = hexToRgba(colors?.dark || "#000000", 0.063);
+  const borderCol = hexToRgba(colors?.main || "#ffffff", 0.314);
+
+  return `
+    <a
+      class="group relative flex min-w-[210px] max-w-[260px] flex-col justify-between rounded-xl border bg-monitor-card/80 px-4 py-3 text-left transition-all duration-200 hover:-translate-y-1 hover:shadow-[0_0_15px_(59,130,246,0.2)] hover:border-blue-400/50 shrink-0"
+      aria-label="${report.event_type} report details"
+      href="/reports"
+      style="background-image: linear-gradient(135deg, ${gradientA}, ${gradientB}); border-color: ${borderCol}"
+    >
+      <div class="relative flex items-start gap-2 text-sm text-zinc-100 pr-16">
+        <span class="text-xs font-bold font-mono text-gray-500">${String(index).padStart(2, "0")}</span>
+        <span style="${hexToRgba(colors?.main || "#ffffff")}">${icon}</span>
+        <p class="flex-1 font-semibold leading-tight text-sm text-white line-clamp-2 font-tech tracking-wide">${report.event_type}</p>
+      </div>
+    </a>
+  `;
+}
+
 function renderWarningCard(warning, index = 1) {
   const severity = getSeverity(warning);
   const icon = getIcon(warning);
@@ -821,6 +912,20 @@ function renderWarningCard(warning, index = 1) {
       </span>
     </div>
   </a>`;
+}
+
+async function updateCurrentTopReports() {
+  const res = await fetch(
+    `https://public.yallsoft.app/rhy/reports.json?t=${new Date().getTime()}`,
+  );
+  const data = await res.json();
+
+  const topReports = document.getElementById("topReports");
+
+  topReports.innerHTML = data.reports
+    .slice(0, 5)
+    .map((r, i) => renderReportCard(r, i + 1))
+    .join("");
 }
 
 async function updateCurrentTopWarnings() {

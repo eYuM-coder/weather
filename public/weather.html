@@ -846,6 +846,69 @@
               </div>
             </div>
           </div>
+          <div class="max-w-7xl mx-auto px-4 md:px-8 mb-8">
+            <div
+              class="transition-element"
+              style="opacity: 0; transform: translateY(10px)"
+            >
+              <div
+                class="rounded-lg border bg-card text-card-foreground shadow-sm tech-card border-monitor-border"
+              >
+                <div
+                  class="flex flex-col space-y-1.5 p-6 pb-3 border-b border-monitor-border/50"
+                >
+                  <div class="flex items-center justify-between gap-4">
+                    <div class="flex items-center gap-3">
+                      <div
+                        class="rounded-lg bg-blue-500/10 border border-blue-500/30 p-2 text-blue-400"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          class="lucide lucide-activity h-4 w-4"
+                        >
+                          <path
+                            d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"
+                          ></path>
+                        </svg>
+                      </div>
+                      <div>
+                        <h3
+                          class="font-semibold text-base md:text-lg text-white font-tech uppercase tracking-wide"
+                        >
+                          Recent Weather Reports
+                        </h3>
+                        <p
+                          class="text-xs md:text-sm text-blue-200/50 font-mono"
+                        >
+                          MEASURED & OBSERVED DATA // UPDATING LIVE
+                        </p>
+                      </div>
+                    </div>
+                    <a
+                      class="text-xs md:text-sm font-medium text-monitor-active hover:text-white transition-colors font-mono uppercase tracking-wide"
+                      href="/reports"
+                    >
+                      View all ->
+                    </a>
+                  </div>
+                </div>
+                <div class="p-6 pt-4">
+                  <div
+                    class="flex gap-3 overflow-x-auto pb-2 pr-2 -mr-2 scrollbar-subtle"
+                    id="topReports"
+                  ></div>
+                </div>
+              </div>
+            </div>
+          </div>
           <div class="max-w-7xl mx-auto px-4 md:px-8 pb-8">
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
               <div

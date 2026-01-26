@@ -463,7 +463,7 @@ function renderReportCard(report, index = 1) {
           </div>
           <div class="bg-black/30 rounded border border-white/5 p-1.5 text-center">
             <p class="text-[9px] uppercase font-tech tracking-wider text-gray-500">Decay</p>
-            <p class="font-bold text-sm font-mono text-white/80">${report.time_factor.toFixed(2)}</p>
+            <p class="font-bold text-sm font-mono text-white/80">${report.time_factor.toFixed(2)}x</p>
           </div>
         </div>
         ${

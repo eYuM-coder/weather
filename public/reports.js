@@ -467,10 +467,11 @@ function renderReportCard(report, index = 1) {
           </div>
         </div>
         ${
-          report.remarks ??
-          `<div class="mt-2 p-2 bg-black/30 rounded border border-white/5">
+          report.remarks
+            ? `<div class="mt-2 p-2 bg-black/30 rounded border border-white/5">
             <p class="text-xs text-gray-300 font-mono">${report.remarks}</p>
           </div>`
+            : ""
         }
       </div>
     </div>`;

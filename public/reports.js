@@ -433,21 +433,21 @@ function renderReportCard(report, index = 1) {
         </div>
         <div class="flex items-center justify-between font-mono text-[10px] md:text-xs uppercase tracking-wide">
           <span class="time-ago flex items-center gap-1 text-gray-400">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="lucide lucide-clock w-3 h-3"
-          >
-            <circle cx="12" cy="12" r="10"></circle>
-            <polyline points="12 6 12 12 16 14"></polyline>
-          </svg>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-clock w-3 h-3"
+            >
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
             ${times}
           </span>
           <span class="text-gray-500">${new Date(report.time).toLocaleString()}</span>
@@ -522,7 +522,25 @@ function updateCardTimers(r, index) {
   const timeAgoEl = card.querySelector(".time-ago");
   const times = getReportTime(r);
 
-  if (timeAgoEl) timeAgoEl.textContent = `${times}`;
+  if (timeAgoEl)
+    timeAgoEl.innerHTML = `
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      class="lucide lucide-clock w-3 h-3"
+    >
+      <circle cx="12" cy="12" r="10"></circle>
+      <polyline points="12 6 12 12 16 14"></polyline>
+    </svg>
+    ${times}
+    `;
 }
 
 // -------------------------------

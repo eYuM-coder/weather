@@ -1,13 +1,14 @@
 {
   "rewrites": [
-    {"source": "/weather", "destination": "/weather.html"},
-    {"source": "/wis-dos", "destination": "/wis-dos.html"},
-    {"source": "/weather", "destination": "/weather.html"},
-    {"source": "/scanners", "destination": "/scanners.html"},
-    {"source": "/warnings", "destination": "/warnings.html"},
-    {"source": "/whats-next", "destination": "/whats-next.html"},
-    {"source": "/zulu", "destination": "/zulu.html"},
-    {"source": "/submit", "destination": "/submit.html"},
-    {"source": "/about", "destination": "/about.html"}
+    { "source": "/weather", "destination": "/weather.html" },
+    { "source": "/wis-dos", "destination": "/wis-dos.html" },
+    { "source": "/weather", "destination": "/weather.html" },
+    { "source": "/scanners", "destination": "/scanners.html" },
+    { "source": "/warnings", "destination": "/warnings.html" },
+    { "source": "/whats-next", "destination": "/whats-next.html" },
+    { "source": "/zulu", "destination": "/zulu.html" },
+    { "source": "/submit", "destination": "/submit.html" },
+    { "source": "/about", "destination": "/about.html" },
+    { "source": "/reports", "destination": "/reports.html" }
   ]
 }

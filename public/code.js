@@ -585,12 +585,12 @@ function drawWISChart(
   const t = Math.floor(Date.now()) / 1000;
   const pulse = Math.sin(t * 4) * 0.5 + 0.5;
   const radius = 5 + pulse * 3;
-  ctx.fillStyle = "#10b981";
+  ctx.fillStyle = `rgba(16, 185, 129, ${.3 * pulse})`;
   ctx.beginPath();
   ctx.arc(nowX, nowY, radius + 5, 0, 2 * Math.PI);
   ctx.fill();
 
-  ctx.fillStyle = getWISColor(data.wis.weather_intensity_score);
+  ctx.fillStyle = "#10b981"
   ctx.strokeStyle = "rgba(255,255,255,0.8)";
   ctx.lineWidth = 2;
   ctx.beginPath();

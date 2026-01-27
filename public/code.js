@@ -555,34 +555,33 @@ function drawWISChart(
   if (historyPoints.length > 0) {
     ctx.lineWidth = 3;
     ctx.setLineDash([]);
+    if (historyPoints.length < 2) return;
+
+    ctx.lineJoin = "round";
+    ctx.lineCap = "round";
+
+    let p1 = historyPoints[0];
     ctx.beginPath();
-    ctx.moveTo(historyPoints[0].x, historyPoints[0].y);
+    ctx.moveTo(p1.x, p1.y);
 
-    historyPoints.forEach((p1, i) => {
-      const p2 = historyPoints[i + 1] || {
-        x: timeToPixel(now),
-        y: yToPixel(data.wis.weather_intensity_score),
-        score: p1.score,
-      };
+    historyPoints.forEach((p2, i) => {
+      if (i === 0) return;
 
-      const x1 = p1.x;
-      const y1 = p1.y;
-      const x2 = p2.x;
-      const y2 = p2.y;
-
-      const c1 = getWISColor(p1.score);
-      const c2 = getWISColor(p2.score);
-
-      const grad = ctx.createLinearGradient(x1, y1, x2, y2);
-      grad.addColorStop(0, c1);
-      grad.addColorStop(1, c2);
+      const grad = ctx.createLinearGradient(p1.x, p1.y, p2.x, p2.y);
+      grad.addColorStop(0, getWISColor(p1.score));
+      grad.addColorStop(1, getWISColor(p2.score));
 
       ctx.strokeStyle = grad;
 
       ctx.lineTo(p2.x, p2.y);
-    });
+      ctx.stroke();
 
-    ctx.stroke();
+      // prepare for next segment without breaking continuity
+      ctx.beginPath();
+      ctx.moveTo(p2.x, p2.y);
+
+      p1 = p2;
+    });
   }
 
   // === Draw Current Point ===

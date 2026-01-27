@@ -265,23 +265,23 @@ const lerp = (a, b, t) => a + (b - a) * t;
 const smoothstep = (t) => t * t * (3 - 2 * t);
 
 const WIS_BANDS = [
-  { min: 0, max: 30, start: "rgb(16, 185, 129)", end: "rgb(250, 204, 21)" },
-  { min: 30, max: 50, start: "rgb(250, 204, 21)", end: "rgb(251, 146, 60)" },
-  { min: 50, max: 70, start: "rgb(251, 146, 60)", end: "rgb(239, 68, 68)" },
-  { min: 70, max: 100, start: "rgb(239, 68, 68)", end: "rgb(220, 38, 38)" },
-  { min: 100, max: 150, start: "rgb(220, 38, 38)", end: "rgb(168, 85, 247)" },
-  { min: 150, max: 250, start: "rgb(168, 85, 247)", end: "rgb(232, 121, 249)" },
+  { min: 0, max: 30, start: "rgba(16, 185, 129, 1)", end: "rgba(250, 204, 21, 1)" },
+  { min: 30, max: 50, start: "rgba(250, 204, 21, 1)", end: "rgba(251, 146, 60, 1)" },
+  { min: 50, max: 70, start: "rgba(251, 146, 60, 1)", end: "rgba(239, 68, 68, 1)" },
+  { min: 70, max: 100, start: "rgba(239, 68, 68, 1)", end: "rgba(220, 38, 38, 1)" },
+  { min: 100, max: 150, start: "rgba(220, 38, 38, 1)", end: "rgba(168, 85, 247, 1)" },
+  { min: 150, max: 250, start: "rgba(168, 85, 247, 1)", end: "rgba(232, 121, 249, 1)" },
   {
     min: 250,
     max: 350,
-    start: "rgb(232, 121, 249)",
-    end: "rgb(251, 113, 133)",
+    start: "rgba(232, 121, 249, 1)",
+    end: "rgba(251, 113, 133, 1)",
   },
   {
     min: 350,
     max: 500,
-    start: "rgb(251, 113, 133)",
-    end: "rgb(255, 255, 255)",
+    start: "rgba(251, 113, 133, 1)",
+    end: "rgba(255, 255, 255, 1)",
   },
 ];
 
@@ -289,7 +289,6 @@ const withAlpha = (rgb, a = 1) =>
   rgb.startsWith("rgba")
     ? rgb.replace(/rgba\(([^)]+),[^)]+\)/, `rgba($1,${a})`)
     : rgb.replace("rgb(", "rgba(").replace(")", `,${a})`);
-
 function getWISColor(value, alpha = 1) {
   for (const band of WIS_BANDS) {
     if (value >= band.min && value < band.max) {

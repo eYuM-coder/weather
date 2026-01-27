@@ -556,8 +556,8 @@ function drawWISChart(
     ctx.lineWidth = 3;
     ctx.setLineDash([]);
     ctx.beginPath();
-
-    // 2️⃣ PASS TWO — draw gradient per segment
+    ctx.lineJoin("round");
+    
     for (let i = 0; i < historyPoints.length; i++) {
       const p1 = historyPoints[i];
       const p2 = historyPoints[i + 1] || {

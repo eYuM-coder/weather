@@ -556,8 +556,6 @@ function drawWISChart(
     ctx.lineWidth = 3;
     ctx.setLineDash([]);
     ctx.beginPath();
-
-    ctx.beginPath();
     ctx.moveTo(historyPoints[0].x, historyPoints[0].y);
 
     historyPoints.forEach((p1, i) => {
@@ -582,8 +580,9 @@ function drawWISChart(
       ctx.strokeStyle = grad;
 
       ctx.lineTo(p2.x, p2.y);
-      ctx.stroke();
     });
+
+    ctx.stroke();
   }
 
   // === Draw Current Point ===

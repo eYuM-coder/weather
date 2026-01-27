@@ -366,6 +366,7 @@ async function updateMiniWIS() {
     const thresholdValueEl = document.getElementById(
       "live-wis-threshold-value",
     );
+    const thresholdEl = document.getElementById("live-wis-threshold");
     const updatedEl = document.getElementById("live-wis-updated");
     const thresholdBar = document.getElementById("threshold-bar");
 
@@ -398,12 +399,18 @@ async function updateMiniWIS() {
       thresholdValueEl.style.transition = "opacity .3s, transform .3s";
       thresholdValueEl.style.opacity = "0";
       thresholdValueEl.style.transform = "translateY(10px)";
+      thresholdEl.style.transition = "opacity .3s, transform .3s";
+      thresholdEl.style.opacity = "0";
+      thresholdEl.style.transform = "translateY(10px)";
       thresholdBar.style.width = `${(wis / threshold) * 100}%`;
 
       setTimeout(() => {
         thresholdValueEl.textContent = threshold;
         thresholdValueEl.style.opacity = "1";
         thresholdValueEl.style.transform = "translateY(0)";
+        thresholdEl.textContent = `/ ${threshold}`;
+        thresholdEl.style.opacity = "1";
+        thresholdEl.style.transform = "translateY(0)";
       }, 200);
 
       lastThreshold = threshold;

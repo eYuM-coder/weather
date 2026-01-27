@@ -347,7 +347,6 @@ function parseMarkdownDocs(md) {
 // UPDATE: Live WIS Mini Card
 // ==========================
 let lastWIS = null;
-const thresholdValueEl = document.getElementById("live-wis-threshold-value");
 let lastThreshold = null;
 
 async function updateMiniWIS() {
@@ -364,6 +363,9 @@ async function updateMiniWIS() {
     const timestamp = data.wis.timestamp;
 
     const valEl = document.getElementById("live-wis-value");
+    const thresholdValueEl = document.getElementById(
+      "live-wis-threshold-value",
+    );
     const updatedEl = document.getElementById("live-wis-updated");
     const thresholdBar = document.getElementById("threshold-bar");
 

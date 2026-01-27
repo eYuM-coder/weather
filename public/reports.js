@@ -449,7 +449,7 @@ function renderReportCard(report, index = 1) {
             ${report.magnitude} ${report.unit}
           </div>
         </div>
-        <div class="flex items-center justify-between font-mono text-[10px] md:text-xs uppercase tracking-wide">
+        <div class="flex items-center justify-between font-mono text-[10px] md:text-xs uppercase tracking-wide mb-2">
           <span class="time-ago flex items-center gap-1 text-gray-400">
             <svg
               xmlns="http://www.w3.org/2000/svg"

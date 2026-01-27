@@ -1825,7 +1825,7 @@ async function updateWeatherIntensity() {
 
   scoreElement.textContent = weather_intensity_score.toFixed(2);
   document.getElementById("scoreThreshold").textContent =
-    `/ ${STREAM_THRESHOLDS.ACTIVE}`;
+    `/ ${STREAM_THRESHOLDS.ACTIVE.toFixed(2)} THRESHOLD`;
   const percentOfThreshold =
     (weather_intensity_score / STREAM_THRESHOLDS.ACTIVE) * 100;
   const rhyPercentOfThreshold =

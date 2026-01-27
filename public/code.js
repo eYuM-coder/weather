@@ -582,7 +582,29 @@ function drawWISChart(
       p1 = p2;
     });
 
-    ctx.lineTo(timeToPixel(now), yToPixel(data.wis.weather_intensity_score));
+    const lastPoint = historyPoints[historyPoints.length - 1];
+
+    const nowPoint = {
+      x: timeToPixel(now),
+      y: yToPixel(data.wis.weather_intensity_score),
+      score: data.wis.weather_intensity_score,
+    };
+
+    const grad = ctx.createLinearGradient(
+      lastPoint.x,
+      lastPoint.y,
+      nowPoint.x,
+      nowPoint.y,
+    );
+
+    grad.addColorStop(0, getWISColor(lastPoint.score));
+    grad.addColorStop(1, getWISColor(nowPoint.score));
+
+    ctx.strokeStyle = grad;
+
+    ctx.beginPath();
+    ctx.moveTo(lastPoint.x, lastPoint.y);
+    ctx.lineTo(nowPoint.x, nowPoint.y);
     ctx.stroke();
   }
 

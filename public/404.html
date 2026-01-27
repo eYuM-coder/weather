@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -8,6 +8,69 @@
       href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
+    <link
+      rel="icon"
+      href="/r-fav-dark-256x256.png"
+      type="image/png"
+      media="(prefers-color-scheme: light)"
+    />
+    <link
+      rel="icon"
+      href="/r-fav.png"
+      type="image/png"
+      media="(prefers-color-scheme: dark)"
+    />
+    <link rel="icon" href="/EYUMHEADER.png" />
+    <meta
+      name="description"
+      content="Official home of eYuM — live severe weather coverage, expert forecasts, radar tools, preparedness tips, and community updates from Ryan Hall. eYuM is an independent, solo future meteorologist inspired by Ryan Hall, providing real-time weather coverage whenever possible."
+    />
+    <meta name="author" content="Ryan Hall & eYuM" />
+    <meta
+      name="keywords"
+      content="Ryan Hall Y'all, Ryan Hall, eYuM, weather forecast, severe weather updates, live radar, storm tracking, meteorologist"
+    />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#0b1f3a" />
+    <link rel="canonical" href="https://weather-mocha-zeta.vercel.app" />
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://weather-mocha-zeta.vercel.app/" />
+    <meta
+      property="og:title"
+      content="eYuM | Severe Weather Coverage & Forecasts"
+    />
+    <meta
+      property="og:description"
+      content="Official home of eYuM — live severe weather coverage, expert forecasts, radar tools, preparedness tips, and community updates from Ryan Hall. eYuM is an independent, solo future meteorologist inspired by Ryan Hall, providing real-time weather coverage whenever possible."
+    />
+    <meta
+      property="og:image"
+      content="https://weather-mocha-zeta.vercel.app/og-image.png"
+    />
+    <meta property="og:image:alt" content="eYuM severe weather coverage" />
+    <meta property="og:site_name" content="eYuM" />
+    <meta property="og:locale" content="en_US" />
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta
+      property="twitter:url"
+      content="https://weather-mocha-zeta.vercel.app/"
+    />
+    <meta
+      property="twitter:title"
+      content="eYuM | Severe Weather Coverage & Forecasts"
+    />
+    <meta
+      property="twitter:description"
+      content="Official home of eYuM — live severe weather coverage, expert forecasts, radar tools, preparedness tips, and community updates from Ryan Hall. eYuM is an independent, solo future meteorologist inspired by Ryan Hall, providing real-time weather coverage whenever possible."
+    />
+    <meta
+      property="twitter:image"
+      content="https://weather-mocha-zeta.vercel.app/og-image.png"
+    />
+    <meta property="twitter:site" content="@eYuM_Not_MuYe" />
+    <meta property="twitter:creator" content="@eYuM_Not_MuYe" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js"></script>
     <style>
       * {
@@ -21,7 +84,10 @@
       }
 
       body {
-        font-family: "Space Grotesk", -apple-system, BlinkMacSystemFont,
+        font-family:
+          "Space Grotesk",
+          -apple-system,
+          BlinkMacSystemFont,
           sans-serif;
         background: #000000;
         color: #c0c0c0;
@@ -97,7 +163,10 @@
         font-weight: 500;
         text-decoration: none;
         border-radius: 32px;
-        transition: background 0.1s ease, transform 0.3s ease, color 0.1s ease;
+        transition:
+          background 0.1s ease,
+          transform 0.3s ease,
+          color 0.1s ease;
         letter-spacing: 0.02em;
         pointer-events: all;
       }
@@ -269,7 +338,7 @@
         {
           isStatic: true,
           render: { fillStyle: "rgba(255, 255, 255, 0.05)" },
-        }
+        },
       );
 
       const leftWall = Bodies.rectangle(
@@ -280,7 +349,7 @@
         {
           isStatic: true,
           render: { fillStyle: "rgba(255, 255, 255, 0.05)" },
-        }
+        },
       );
 
       const rightWall = Bodies.rectangle(
@@ -291,7 +360,7 @@
         {
           isStatic: true,
           render: { fillStyle: "rgba(255, 255, 255, 0.05)" },
-        }
+        },
       );
 
       const homeBtn = document.getElementById("homeBtn");
@@ -308,7 +377,7 @@
           isStatic: true,
           restitution: 2.5,
           render: { visible: false },
-        }
+        },
       );
 
       Composite.add(engine.world, [ground, leftWall, rightWall, bouncyButton]);
@@ -512,22 +581,22 @@
         } else if (shapeType < 0.4) {
           obj = createRandomCircle(
             event.mouse.position.x,
-            event.mouse.position.y
+            event.mouse.position.y,
           );
         } else if (shapeType < 0.6) {
           obj = createRandomTriangle(
             event.mouse.position.x,
-            event.mouse.position.y
+            event.mouse.position.y,
           );
         } else if (shapeType < 0.8) {
           obj = createRandomPentagon(
             event.mouse.position.x,
-            event.mouse.position.y
+            event.mouse.position.y,
           );
         } else {
           obj = createRandomHexagon(
             event.mouse.position.x,
-            event.mouse.position.y
+            event.mouse.position.y,
           );
         }
 
@@ -613,7 +682,7 @@
                 strokeStyle: "rgba(255, 255, 255, 0.2)",
                 lineWidth: 3,
               },
-            }
+            },
           );
           if (!rgbMode) {
             bodyOriginalColors.set(bigCircle.id, bigCircle.render.fillStyle);

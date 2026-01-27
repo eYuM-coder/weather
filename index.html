@@ -28,10 +28,10 @@
     />
     <meta name="robots" content="index, follow" />
     <meta name="theme-color" content="#0b1f3a" />
-    <link rel="canonical" href="https://we.eyum.dev" />
+    <link rel="canonical" href="https://weather-mocha-zeta.vercel.app" />
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://we.eyum.dev/" />
+    <meta property="og:url" content="https://weather-mocha-zeta.vercel.app/" />
     <meta
       property="og:title"
       content="eYuM | Severe Weather Coverage & Forecasts"
@@ -40,13 +40,19 @@
       property="og:description"
       content="Official home of eYuM — live severe weather coverage, expert forecasts, radar tools, preparedness tips, and community updates from Ryan Hall. eYuM is an independent, solo future meteorologist inspired by Ryan Hall, providing real-time weather coverage whenever possible."
     />
-    <meta property="og:image" content="https://we.eyum.dev/og-image.png" />
+    <meta
+      property="og:image"
+      content="https://weather-mocha-zeta.vercel.app/og-image.png"
+    />
     <meta property="og:image:alt" content="eYuM severe weather coverage" />
     <meta property="og:site_name" content="eYuM" />
     <meta property="og:locale" content="en_US" />
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content="https://we.eyum.dev/" />
+    <meta
+      property="twitter:url"
+      content="https://weather-mocha-zeta.vercel.app/"
+    />
     <meta
       property="twitter:title"
       content="eYuM | Severe Weather Coverage & Forecasts"
@@ -55,7 +61,10 @@
       property="twitter:description"
       content="Official home of eYuM — live severe weather coverage, expert forecasts, radar tools, preparedness tips, and community updates from Ryan Hall. eYuM is an independent, solo future meteorologist inspired by Ryan Hall, providing real-time weather coverage whenever possible."
     />
-    <meta property="twitter:image" content="https://we.eyum.dev/og-image.png" />
+    <meta
+      property="twitter:image"
+      content="https://weather-mocha-zeta.vercel.app/og-image.png"
+    />
     <meta property="twitter:site" content="@eYuM_Not_MuYe" />
     <meta property="twitter:creator" content="@eYuM_Not_MuYe" />
     <link rel="stylesheet" href="rhystyles.css" />
@@ -174,146 +183,145 @@
                 >
                   <path d="m6 9 6 6 6-6"></path>
                 </svg>
-              </button>
 
-              <!-- DROPDOWN -->
-              <div
-                id="toolsMenu"
-                class="hidden fixed z-50 overflow-hidden rounded-md border text-popover-foreground data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 bg-monitor-card/95 backdrop-blur-xl border-monitor-border/50 shadow-xl p-1 min-w-[200px]"
-                data-state="closed"
-                data-side="bottom"
-                data-align="center"
-                aria-orientation="vertical"
-                role="menu"
-              >
                 <div
-                  class="px-2 py-1.5 text-xs font-bold text-gray-500 uppercase tracking-wider"
+                  id="toolsMenu"
+                  class="hidden fixed z-50 overflow-hidden rounded-md border text-popover-foreground data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 bg-monitor-card/95 backdrop-blur-xl border-monitor-border/50 shadow-xl p-1 min-w-[200px]"
+                  data-state="closed"
+                  data-side="bottom"
+                  data-align="center"
+                  aria-orientation="vertical"
+                  role="menu"
                 >
-                  Mission Tools
+                  <div
+                    class="px-2 py-1.5 text-xs font-bold text-gray-500 uppercase tracking-wider"
+                  >
+                    Mission Tools
+                  </div>
+                  <!-- WIS/DOS -->
+                  <a
+                    href="/wis-dos"
+                    class="menu-item relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 flex items-center space-x-2 text-gray-300 hover:text-white hover:bg-white/5 rounded-sm cursor-pointer p-2"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="lucide lucide-info w-4 h-4 text-blue-400"
+                    >
+                      <circle cx="12" cy="12" r="10" />
+                      <path d="M12 16v-4" />
+                      <path d="M12 8h.01" />
+                    </svg>
+                    <span>WIS/DOS</span>
+                  </a>
+
+                  <!-- Scanners -->
+                  <a
+                    href="/scanners"
+                    class="menu-item relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 flex items-center space-x-2 text-gray-300 hover:text-white hover:bg-white/5 rounded-sm cursor-pointer p-2"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="lucide lucide-radio w-4 h-4 text-green-400"
+                    >
+                      <path d="M4.9 19.1C1 15.2 1 8.8 4.9 4.9" />
+                      <path d="M7.8 16.2c-2.3-2.3-2.3-6.1 0-8.5" />
+                      <circle cx="12" cy="12" r="2" />
+                      <path d="M16.2 7.8c2.3 2.3 2.3 6.1 0 8.5" />
+                      <path d="M19.1 4.9C23 8.8 23 15.1 19.1 19" />
+                    </svg>
+                    <span>Scanners</span>
+                  </a>
+
+                  <!-- Top 10 Warnings -->
+                  <a
+                    href="/warnings"
+                    class="menu-item relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 flex items-center space-x-2 text-gray-300 hover:text-white hover:bg-white/5 rounded-sm cursor-pointer p-2"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="lucide lucide-triangle-alert w-4 h-4 text-red-400"
+                    >
+                      <path
+                        d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"
+                      />
+                      <path d="M12 9v4" />
+                      <path d="M12 17h.01" />
+                    </svg>
+                    <span>Top 10 Warnings</span>
+                  </a>
+
+                  <!-- What's Next -->
+                  <a
+                    class="menu-item relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 flex items-center space-x-2 text-gray-300 hover:text-white hover:bg-white/5 rounded-sm cursor-pointer p-2"
+                    href="/whats-next"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="lucide lucide-timer w-4 h-4 text-cyan-400"
+                    >
+                      <line x1="10" x2="14" y1="2" y2="2"></line>
+                      <line x1="12" x2="15" y1="14" y2="11"></line>
+                      <circle cx="12" cy="14" r="8"></circle>
+                    </svg>
+                    <span>What's Next?</span>
+                  </a>
+
+                  <!-- Zulu Converter -->
+                  <a
+                    href="/zulu"
+                    class="menu-item relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 flex items-center space-x-2 text-gray-300 hover:text-white hover:bg-white/5 rounded-sm cursor-pointer p-2"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="lucide lucide-clock w-4 h-4 text-orange-400"
+                    >
+                      <circle cx="12" cy="12" r="10" />
+                      <polyline points="12 6 12 12 16 14" />
+                    </svg>
+                    <span>Zulu Converter</span>
+                  </a>
                 </div>
-                <!-- WIS/DOS -->
-                <a
-                  href="/wis-dos"
-                  class="menu-item relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 flex items-center space-x-2 text-gray-300 hover:text-white hover:bg-white/5 rounded-sm cursor-pointer p-2"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    class="lucide lucide-info w-4 h-4 text-blue-400"
-                  >
-                    <circle cx="12" cy="12" r="10" />
-                    <path d="M12 16v-4" />
-                    <path d="M12 8h.01" />
-                  </svg>
-                  <span>WIS/DOS</span>
-                </a>
-
-                <!-- Scanners -->
-                <a
-                  href="/scanners"
-                  class="menu-item relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 flex items-center space-x-2 text-gray-300 hover:text-white hover:bg-white/5 rounded-sm cursor-pointer p-2"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    class="lucide lucide-radio w-4 h-4 text-green-400"
-                  >
-                    <path d="M4.9 19.1C1 15.2 1 8.8 4.9 4.9" />
-                    <path d="M7.8 16.2c-2.3-2.3-2.3-6.1 0-8.5" />
-                    <circle cx="12" cy="12" r="2" />
-                    <path d="M16.2 7.8c2.3 2.3 2.3 6.1 0 8.5" />
-                    <path d="M19.1 4.9C23 8.8 23 15.1 19.1 19" />
-                  </svg>
-                  <span>Scanners</span>
-                </a>
-
-                <!-- Top 10 Warnings -->
-                <a
-                  href="/warnings"
-                  class="menu-item relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 flex items-center space-x-2 text-gray-300 hover:text-white hover:bg-white/5 rounded-sm cursor-pointer p-2"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    class="lucide lucide-triangle-alert w-4 h-4 text-red-400"
-                  >
-                    <path
-                      d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"
-                    />
-                    <path d="M12 9v4" />
-                    <path d="M12 17h.01" />
-                  </svg>
-                  <span>Top 10 Warnings</span>
-                </a>
-
-                <!-- What's Next -->
-                <a
-                  class="menu-item relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 flex items-center space-x-2 text-gray-300 hover:text-white hover:bg-white/5 rounded-sm cursor-pointer p-2"
-                  href="/whats-next"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    class="lucide lucide-timer w-4 h-4 text-cyan-400"
-                  >
-                    <line x1="10" x2="14" y1="2" y2="2"></line>
-                    <line x1="12" x2="15" y1="14" y2="11"></line>
-                    <circle cx="12" cy="14" r="8"></circle>
-                  </svg>
-                  <span>What's Next?</span>
-                </a>
-
-                <!-- Zulu Converter -->
-                <a
-                  href="/zulu"
-                  class="menu-item relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 flex items-center space-x-2 text-gray-300 hover:text-white hover:bg-white/5 rounded-sm cursor-pointer p-2"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    class="lucide lucide-clock w-4 h-4 text-orange-400"
-                  >
-                    <circle cx="12" cy="12" r="10" />
-                    <polyline points="12 6 12 12 16 14" />
-                  </svg>
-                  <span>Zulu Converter</span>
-                </a>
-              </div>
+              </button>
 
               <a
                 class="flex items-center space-x-1 md:space-x-2 px-3 py-2 rounded-md transition-all whitespace-nowrap outline-none font-medium text-sm border border-transparent shrink-0 text-gray-400 hover:text-white hover:bg-white/5"

@@ -32,7 +32,7 @@ const dot = document.getElementById("threshold-toggle-circle");
 // ===============================
 
 const toolsButton = document.getElementById("toolsButton");
-const toolsMenu = document.getElementById("toolsMenu");
+const toolsMenu = toolsButton.getElementById("toolsMenu");
 
 let menuOpen = false;
 

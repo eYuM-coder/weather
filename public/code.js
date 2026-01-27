@@ -581,6 +581,9 @@ function drawWISChart(
 
       p1 = p2;
     });
+
+    ctx.lineTo(timeToPixel(now), yToPixel(data.wis.weather_intensity_score));
+    ctx.stroke();
   }
 
   // === Draw Current Point ===

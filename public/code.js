@@ -557,6 +557,8 @@ function drawWISChart(
     ctx.setLineDash([]);
     if (historyPoints.length < 2) return;
 
+    ctx.lineCap = "round";
+
     let p1 = historyPoints[0];
     ctx.beginPath();
     ctx.moveTo(p1.x, p1.y);
@@ -605,6 +607,8 @@ function drawWISChart(
     ctx.lineTo(nowPoint.x, nowPoint.y);
     ctx.stroke();
   }
+
+  ctx.lineCap = "butt";
 
   // === Draw Current Point ===
   const nowX = timeToPixel(now);

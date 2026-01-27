@@ -193,23 +193,53 @@ const lerp = (a, b, t) => a + (b - a) * t;
 const smoothstep = (t) => t * t * (3 - 2 * t);
 
 const WIS_BANDS = [
-  { min: 0, max: 30, start: "rgb(16, 185, 129)", end: "rgb(250, 204, 21)" },
-  { min: 30, max: 50, start: "rgb(250, 204, 21)", end: "rgb(251, 146, 60)" },
-  { min: 50, max: 70, start: "rgb(251, 146, 60)", end: "rgb(239, 68, 68)" },
-  { min: 70, max: 100, start: "rgb(239, 68, 68)", end: "rgb(220, 38, 38)" },
-  { min: 100, max: 150, start: "rgb(220, 38, 38)", end: "rgb(168, 85, 247)" },
-  { min: 150, max: 250, start: "rgb(168, 85, 247)", end: "rgb(232, 121, 249)" },
+  {
+    min: 0,
+    max: 30,
+    start: "rgba(16, 185, 129, 1)",
+    end: "rgba(250, 204, 21, 1)",
+  },
+  {
+    min: 30,
+    max: 50,
+    start: "rgba(250, 204, 21, 1)",
+    end: "rgba(251, 146, 60, 1)",
+  },
+  {
+    min: 50,
+    max: 70,
+    start: "rgba(251, 146, 60, 1)",
+    end: "rgba(239, 68, 68, 1)",
+  },
+  {
+    min: 70,
+    max: 100,
+    start: "rgba(239, 68, 68, 1)",
+    end: "rgba(220, 38, 38, 1)",
+  },
+  {
+    min: 100,
+    max: 150,
+    start: "rgba(220, 38, 38, 1)",
+    end: "rgba(168, 85, 247, 1)",
+  },
+  {
+    min: 150,
+    max: 250,
+    start: "rgba(168, 85, 247, 1)",
+    end: "rgba(232, 121, 249, 1)",
+  },
   {
     min: 250,
     max: 350,
-    start: "rgb(232, 121, 249)",
-    end: "rgb(251, 113, 133)",
+    start: "rgba(232, 121, 249, 1)",
+    end: "rgba(251, 113, 133, 1)",
   },
   {
     min: 350,
     max: 500,
-    start: "rgb(251, 113, 133)",
-    end: "rgb(255, 255, 255)",
+    start: "rgba(251, 113, 133, 1)",
+    end: "rgba(255, 255, 255, 1)",
   },
 ];
 
@@ -627,36 +657,60 @@ function drawWISChart(
   if (historyPoints.length > 0) {
     ctx.lineWidth = 3;
     ctx.setLineDash([]);
+    if (historyPoints.length < 2) return;
+
+    ctx.lineCap = "round";
+
+    let p1 = historyPoints[0];
     ctx.beginPath();
+    ctx.moveTo(p1.x, p1.y);
 
-    // 2️⃣ PASS TWO — draw gradient per segment
-    for (let i = 0; i < historyPoints.length; i++) {
-      const p1 = historyPoints[i];
-      const p2 = historyPoints[i + 1] || {
-        x: timeToPixel(now),
-        y: yToPixel(data.wis.weather_intensity_score),
-      };
+    historyPoints.forEach((p2, i) => {
+      if (i === 0) return;
 
-      const x1 = p1.x;
-      const y1 = p1.y;
-
-      const x2 = p2.x;
-      const y2 = p2.y;
-
-      const c1 = getWISColor(p1.score);
-      const c2 = getWISColor(p2.score);
-
-      const grad = ctx.createLinearGradient(x1, y1, x2, y2);
-      grad.addColorStop(0, c1);
-      grad.addColorStop(1, c2);
+      const grad = ctx.createLinearGradient(p1.x, p1.y, p2.x, p2.y);
+      grad.addColorStop(0, getWISColor(p1.score));
+      grad.addColorStop(1, getWISColor(p2.score));
 
       ctx.strokeStyle = grad;
-      ctx.beginPath();
-      ctx.moveTo(x1, y1);
-      ctx.lineTo(x2, y2);
+
+      ctx.lineTo(p2.x, p2.y);
       ctx.stroke();
-    }
+
+      // prepare for next segment without breaking continuity
+      ctx.beginPath();
+      ctx.moveTo(p2.x, p2.y);
+
+      p1 = p2;
+    });
+
+    const lastPoint = historyPoints[historyPoints.length - 1];
+
+    const nowPoint = {
+      x: timeToPixel(now),
+      y: yToPixel(data.wis.weather_intensity_score),
+      score: data.wis.weather_intensity_score,
+    };
+
+    const grad = ctx.createLinearGradient(
+      lastPoint.x,
+      lastPoint.y,
+      nowPoint.x,
+      nowPoint.y,
+    );
+
+    grad.addColorStop(0, getWISColor(lastPoint.score));
+    grad.addColorStop(1, getWISColor(nowPoint.score));
+
+    ctx.strokeStyle = grad;
+
+    ctx.beginPath();
+    ctx.moveTo(lastPoint.x, lastPoint.y);
+    ctx.lineTo(nowPoint.x, nowPoint.y);
+    ctx.stroke();
   }
+
+  ctx.lineCap = "butt";
 
   // === Draw Current Point ===
   const nowX = timeToPixel(now);
@@ -677,7 +731,10 @@ function drawWISChart(
   const t = Math.floor(Date.now()) / 1000;
   const pulse = Math.sin(t * 4) * 0.5 + 0.5;
   const radius = 5 + pulse * 3;
-  ctx.fillStyle = getWISColor(data.wis.weather_intensity_score, Math.min(0.3 * pulse, 0));
+  ctx.fillStyle = getWISColor(
+    data.wis.weather_intensity_score,
+    Math.max(0.3 * pulse, 0),
+  );
   ctx.beginPath();
   ctx.arc(nowX, nowY, radius + 5, 0, 2 * Math.PI);
   ctx.fill();
@@ -1101,15 +1158,16 @@ async function updateWeatherIntensity() {
     if (intensity !== lastIntensity) {
       scoreElement.classList.add("text-monitor-active", "scale-110");
       scoreElement.classList.remove("text-white");
-      lucideActivityElement.classList.add("text-monitor-active", "animate-pulse");
+      lucideActivityElement.classList.add(
+        "text-monitor-active",
+        "animate-pulse",
+      );
       lucideActivityElement.classList.remove("text-gray-500");
     }
   }
 
   setTimeout(() => {
-    scoreElement.classList.remove(
-      "text-monitor-active"
-    );
+    scoreElement.classList.remove("text-monitor-active");
     lucideActivityElement.classList.remove(
       "text-monitor-active",
       "animate-pulse",

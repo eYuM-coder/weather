@@ -265,12 +265,42 @@ const lerp = (a, b, t) => a + (b - a) * t;
 const smoothstep = (t) => t * t * (3 - 2 * t);
 
 const WIS_BANDS = [
-  { min: 0, max: 30, start: "rgba(16, 185, 129, 1)", end: "rgba(250, 204, 21, 1)" },
-  { min: 30, max: 50, start: "rgba(250, 204, 21, 1)", end: "rgba(251, 146, 60, 1)" },
-  { min: 50, max: 70, start: "rgba(251, 146, 60, 1)", end: "rgba(239, 68, 68, 1)" },
-  { min: 70, max: 100, start: "rgba(239, 68, 68, 1)", end: "rgba(220, 38, 38, 1)" },
-  { min: 100, max: 150, start: "rgba(220, 38, 38, 1)", end: "rgba(168, 85, 247, 1)" },
-  { min: 150, max: 250, start: "rgba(168, 85, 247, 1)", end: "rgba(232, 121, 249, 1)" },
+  {
+    min: 0,
+    max: 30,
+    start: "rgba(16, 185, 129, 1)",
+    end: "rgba(250, 204, 21, 1)",
+  },
+  {
+    min: 30,
+    max: 50,
+    start: "rgba(250, 204, 21, 1)",
+    end: "rgba(251, 146, 60, 1)",
+  },
+  {
+    min: 50,
+    max: 70,
+    start: "rgba(251, 146, 60, 1)",
+    end: "rgba(239, 68, 68, 1)",
+  },
+  {
+    min: 70,
+    max: 100,
+    start: "rgba(239, 68, 68, 1)",
+    end: "rgba(220, 38, 38, 1)",
+  },
+  {
+    min: 100,
+    max: 150,
+    start: "rgba(220, 38, 38, 1)",
+    end: "rgba(168, 85, 247, 1)",
+  },
+  {
+    min: 150,
+    max: 250,
+    start: "rgba(168, 85, 247, 1)",
+    end: "rgba(232, 121, 249, 1)",
+  },
   {
     min: 250,
     max: 350,

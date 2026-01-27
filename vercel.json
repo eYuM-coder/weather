@@ -9,6 +9,7 @@
     { "source": "/zulu", "destination": "/zulu.html" },
     { "source": "/submit", "destination": "/submit.html" },
     { "source": "/about", "destination": "/about.html" },
-    { "source": "/reports", "destination": "/reports.html" }
+    { "source": "/reports", "destination": "/reports.html" },
+    { "source": "/terms", "destination": "/terms.html" }
   ]
 }

@@ -584,6 +584,7 @@ function drawWISChart(
       ctx.lineTo(x2, y2);
     }
 
+    ctx.lineTo(timeToPixel(now), yToPixel(data.wis.weather_intensity_score));
     ctx.stroke();
   }
 

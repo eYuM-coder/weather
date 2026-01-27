@@ -631,7 +631,7 @@ function drawWISChart(
   const radius = 5 + pulse * 3;
   ctx.fillStyle = getWISColor(
     data.wis.weather_intensity_score,
-    Math.min(0.3 * pulse, 0),
+    Math.max(0.3 * pulse, 0),
   );
   ctx.beginPath();
   ctx.arc(nowX, nowY, radius + 5, 0, 2 * Math.PI);

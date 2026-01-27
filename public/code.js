@@ -557,7 +557,6 @@ function drawWISChart(
     ctx.setLineDash([]);
     if (historyPoints.length < 2) return;
 
-    ctx.lineJoin = "round";
     ctx.lineCap = "round";
 
     let p1 = historyPoints[0];

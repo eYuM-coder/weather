@@ -1,3 +1,7 @@
+// ===============================
+// TOOL MENU DROPDOWN
+// ===============================
+
 const toolsButton = document.getElementById("toolsButton");
 const toolsMenu = document.getElementById("toolsMenu");
 
@@ -19,29 +23,27 @@ toolsButton.addEventListener("click", (e) => {
 function positionToolsMenu() {
   const rect = toolsButton.getBoundingClientRect();
 
-  toolsMenu.style.left = `${rect.left}px`;
-  toolsMenu.style.top = `${rect.bottom + 4}px`;
+  toolsMenu.style.position = "fixed";
+  toolsMenu.style.left = `${Math.round(rect.left) - Math.round(rect.width / 2)}px`;
+  toolsMenu.style.top = `55px`;
+  toolsMenu.style.zIndex = `50`;
 }
+
+positionToolsMenu();
 
 function openToolsMenu() {
   positionToolsMenu(); // recalc every time
+  toolsButton.setAttribute("data-state", "open");
+  toolsMenu.setAttribute("data-state", "open");
 
   toolsMenu.classList.remove("hidden");
-  toolsMenu.style.opacity = "0";
-  toolsMenu.style.transform = "scale(0.95)";
-
-  requestAnimationFrame(() => {
-    toolsMenu.style.opacity = "1";
-    toolsMenu.style.transform = "scale(1)";
-  });
 
   rotateChevron(true);
 }
 
 function closeToolsMenu() {
-  toolsMenu.style.opacity = "0";
-  toolsMenu.style.transform = "scale(0.95)";
-
+  toolsButton.setAttribute("data-state", "closed");
+  toolsMenu.setAttribute("data-state", "closed");
   // small delay for animation
   setTimeout(() => {
     toolsMenu.classList.add("hidden");
@@ -70,4 +72,8 @@ function rotateChevron(open) {
 // Optional: Escape key closes it
 document.addEventListener("keydown", (e) => {
   if (e.key === "Escape" && menuOpen) closeToolsMenu();
+});
+
+window.addEventListener("resize", () => {
+  if (menuOpen) positionToolsMenu();
 });

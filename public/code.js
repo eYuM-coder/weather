@@ -553,17 +553,36 @@ function drawWISChart(
   });
 
   if (historyPoints.length > 0) {
-    ctx.strokeStyle = "#10b981";
     ctx.lineWidth = 3;
     ctx.setLineDash([]);
     ctx.beginPath();
 
-    historyPoints.forEach((point, index) => {
-      index === 0 ? ctx.moveTo(point.x, point.y) : ctx.lineTo(point.x, point.y);
-    });
+    for (let i = 0; i < historyPoints.length; i++) {
+      const p1 = historyPoints[i];
+      const p2 = historyPoints[i + 1] || {
+        x: timeToPixel(now),
+        y: yToPixel(data.wis.weather_intensity_score),
+      };
 
-    ctx.lineTo(timeToPixel(now), yToPixel(data.wis.weather_intensity_score));
-    ctx.stroke();
+      const x1 = p1.x;
+      const y1 = p1.y;
+
+      const x2 = p2.x;
+      const y2 = p2.y;
+
+      const c1 = getWISColor(p1.score);
+      const c2 = getWISColor(p2.score);
+
+      const grad = ctx.createLinearGradient(x1, y1, x2, y2);
+      grad.addColorStop(0, c1);
+      grad.addColorStop(1, c2);
+
+      ctx.strokeStyle = grad;
+      ctx.beginPath();
+      ctx.moveTo(x1, y1);
+      ctx.lineTo(x2, y2);
+      ctx.stroke();
+    }
   }
 
   // === Draw Current Point ===
@@ -585,7 +604,10 @@ function drawWISChart(
   const t = Math.floor(Date.now()) / 1000;
   const pulse = Math.sin(t * 4) * 0.5 + 0.5;
   const radius = 5 + pulse * 3;
-  ctx.fillStyle = getWISColor(data.wis.weather_intensity_score, Math.min(0.3 * pulse, 0));
+  ctx.fillStyle = getWISColor(
+    data.wis.weather_intensity_score,
+    Math.min(0.3 * pulse, 0),
+  );
   ctx.beginPath();
   ctx.arc(nowX, nowY, radius + 5, 0, 2 * Math.PI);
   ctx.fill();

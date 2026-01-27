@@ -707,16 +707,16 @@ function getExpiresIn(w) {
   const exp = new Date(w.expires_at).getTime();
   const msLeft = exp - now;
 
-  if (msLeft <= 0) return "Expired";
+  if (msLeft <= 0) return "Expiring";
 
   const min = Math.floor(msLeft / 60000);
-  if (min < 1) return "<1m";
-  if (min < 60) return `${min}m`;
+  if (min < 1) return "<1m left";
+  if (min < 60) return `${min}m left`;
 
   const h = Math.floor(min / 60);
   const m = min % 60;
 
-  return m === 0 ? `${h}h` : `${h}h ${m}m`;
+  return m === 0 ? `${h}h left` : `${h}h ${m}m left`;
 }
 
 function hexToRgba(hex, alpha = 1) {
@@ -962,7 +962,7 @@ function renderWarningCard(warning, index = 1) {
         </svg>
         ${stateCode}
       </span>
-      <span class="font-semibold text-monitor-warning">${expires} left</span>
+      <span class="font-semibold text-monitor-warning">${expires}</span>
     </div>
     <div class="mt-2 flex items-center justify-between text-[10px] text-gray-500 font-mono uppercase">
       <span>Pop: ${pop}</span>

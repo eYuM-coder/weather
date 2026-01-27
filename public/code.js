@@ -557,16 +557,18 @@ function drawWISChart(
     ctx.setLineDash([]);
     ctx.beginPath();
 
-    for (let i = 0; i < historyPoints.length; i++) {
-      const p1 = historyPoints[i];
+    ctx.beginPath();
+    ctx.moveTo(historyPoints[0].x, historyPoints[0].y);
+
+    historyPoints.forEach((p1, i) => {
       const p2 = historyPoints[i + 1] || {
         x: timeToPixel(now),
         y: yToPixel(data.wis.weather_intensity_score),
+        score: p1.score,
       };
 
       const x1 = p1.x;
       const y1 = p1.y;
-
       const x2 = p2.x;
       const y2 = p2.y;
 
@@ -578,11 +580,10 @@ function drawWISChart(
       grad.addColorStop(1, c2);
 
       ctx.strokeStyle = grad;
-      ctx.beginPath();
-      ctx.moveTo(x1, y1);
-      ctx.lineTo(x2, y2);
+
+      ctx.lineTo(p2.x, p2.y);
       ctx.stroke();
-    }
+    });
   }
 
   // === Draw Current Point ===

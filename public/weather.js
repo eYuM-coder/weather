@@ -379,12 +379,9 @@ async function updateMiniWIS() {
       valEl.style.transform = "translateY(10px)";
 
       setTimeout(() => {
-        valEl.innerHTML = `
-          <span class="text-4xl md:text-5xl font-bold text-white font-mono tracking-tighter drop-shadow-[0_0_10px_rgba(56,189,248,0.3)]">
+        valEl.textContent = `
             ${wis.toFixed(2)}
-          </span>
-          <span class="text-sm text-gray-500 font-mono mb-1">/ ${threshold}</span>
-        `;
+          `;
         valEl.style.opacity = "1";
         valEl.style.transform = "translateY(0)";
       }, 200);

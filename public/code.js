@@ -555,10 +555,10 @@ function drawWISChart(
     if (diff >= -10 || diff <= 10) {
       const closest =
         Math.abs(th - minY) < Math.abs(eth - minY)
-          ? { value: th, label: `Threshold: ${(th + halfDiff).toFixed(1)}` }
-          : { value: eth, label: `Threshold: ${(eth + halfDiff).toFixed(1)}` };
+          ? { value: th, label: `Merged Threshold: ${(th + halfDiff).toFixed(1)}` }
+          : { value: eth, label: `Merged Threshold: ${(eth + halfDiff).toFixed(1)}` };
 
-      drawThreshold(closest.value, closest.label, width - margin.right - 100);
+      drawThreshold(closest.value, closest.label, width - margin.right - 120);
     } else {
       drawThreshold(
         th,

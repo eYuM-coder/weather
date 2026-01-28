@@ -558,7 +558,7 @@ function drawWISChart(
         drawThreshold(
           mergedValue,
           `Merged Threshold: ${mergedValue.toFixed(1)} (±${halfDiff.toFixed(1)})`,
-          width - margin.right - 200,
+          width - margin.right - 190,
         );
       }
     } else {

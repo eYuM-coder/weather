@@ -855,8 +855,8 @@ function getReportTime(report) {
       : `${Math.floor(s / 24)}d ago`;
 }
 
-const lastTopReports = [];
-const lastTopWarnings = [];
+let lastTopReports = [];
+let lastTopWarnings = [];
 
 function renderReportCard(report, index = 1) {
   const colors = getReportColor(report.event_code);

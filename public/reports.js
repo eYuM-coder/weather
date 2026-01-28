@@ -473,15 +473,15 @@ function renderReportCard(report, index = 1) {
         <div class="grid grid-cols-3 gap-2">
           <div class="bg-black/30 rounded border border-white/5 p-1.5 text-center">
             <p class="text-[9px] uppercase font-tech tracking-wider text-gray-500">Score</p>
-            <p class="font-bold text-sm font-mono" style="color: ${hexToRgba(colors?.dark)}">${report.score.toFixed(1)}</p>
+            <p class="font-bold text-sm font-mono" style="color: ${hexToRgba(colors?.dark)}" id="report-score">${report.score.toFixed(1)}</p>
           </div>
           <div class="bg-black/30 rounded border border-white/5 p-1.5 text-center">
             <p class="text-[9px] uppercase font-tech tracking-wider text-gray-500">Raw</p>
-            <p class="font-bold text-sm font-mono text-white/80">${report.raw_score.toFixed(1)}</p>
+            <p class="font-bold text-sm font-mono text-white/80" id="report-raw-score">${report.raw_score.toFixed(1)}</p>
           </div>
           <div class="bg-black/30 rounded border border-white/5 p-1.5 text-center">
             <p class="text-[9px] uppercase font-tech tracking-wider text-gray-500">Decay</p>
-            <p class="font-bold text-sm font-mono text-white/80">${report.time_factor.toFixed(2)}x</p>
+            <p class="font-bold text-sm font-mono text-white/80" id="report-time-factor">${report.time_factor.toFixed(2)}x</p>
           </div>
         </div>
         ${
@@ -511,7 +511,7 @@ function updateChangedCards(oldData, newData) {
     const oldR = oldData[i];
 
     // IF NEW WARNING → FULL REPLACE
-    if (!oldR || oldR.event_code !== newR.event_code) {
+    if (!oldR || oldR.event_type !== newR.event_type) {
       replaceCard(newR, i);
       return;
     }
@@ -561,6 +561,27 @@ function updateCardTimers(r, index) {
     `;
 }
 
+function updateCardBoxes(r, index) {
+  const card = document.querySelector(
+    `#reportCards > div:nth-child(${index + 1})`,
+  );
+  if (!card) return;
+
+  const reportScoreEl = card.getElementById("report-score");
+  const reportRawScoreEl = card.getElementById("report-raw-score");
+  const reportTimeFactorEl = card.getElementById("report-time-factor");
+
+  if (reportScoreEl) {
+    reportScoreEl.textContent = `${r.score.toFixed(1)}`;
+  }
+  if (reportRawScoreEl) {
+    reportRawScoreEl.textContent = `${r.raw_score.toFixed(1)}`;
+  }
+  if (reportTimeFactorEl) {
+    reportTimeFactorEl.textContent = `${r.time_factor.toFixed(1)}x`;
+  }
+}
+
 // -------------------------------
 // UPDATE LOOP (SMART)
 // -------------------------------
@@ -586,12 +607,19 @@ function updateAllTimers() {
   });
 }
 
+function updateAllReportBoxes() {
+  lastReports.forEach((r, i) => {
+    updateCardBoxes(r, i);
+  });
+}
+
 // INITIAL LOAD
 fetchTopReports();
 
 // UPDATE ONLY DIFFS EVERY 10s
 setInterval(fetchTopReports, 10000);
 setInterval(updateAllTimers, 1000);
+setInterval(updateAllReportBoxes, 1000);
 
 window.addEventListener("resize", () => {
   if (menuOpen) positionToolsMenu();

@@ -387,7 +387,9 @@ function renderReportCard(report, index = 1) {
             </div>
           </div>
           <div class="flex items-center gap-2 md:gap-4 flex-shrink-0">
-            <div class="text-right hidden sm:block">
+            ${
+              report.magnitude && report.unit
+                ? `<div class="text-right hidden sm:block">
               <div
                 class="text-base md:text-lg font-bold font-mono"
                 style="color: ${colors?.main};"
@@ -395,7 +397,9 @@ function renderReportCard(report, index = 1) {
                 ${report.magnitude} ${report.unit}
               </div>
               <div class="text-[10px] text-gray-500 font-tech uppercase tracking-wider">Magnitude</div>
-            </div>
+            </div>`
+                : ""
+            }
             <a
               href="https://www.google.com/maps?q=${report.geometry?.coordinates[1]},${report.geometry?.coordinates[0]}"
               target="_blank"

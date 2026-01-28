@@ -558,7 +558,7 @@ function drawWISChart(
           ? { value: th, label: `Merged Threshold: ${(th + halfDiff).toFixed(1)}` }
           : { value: eth, label: `Merged Threshold: ${(eth + halfDiff).toFixed(1)}` };
 
-      drawThreshold(closest.value, closest.label, width - margin.right - 430);
+      drawThreshold(closest.value, closest.label, width - margin.right - 140);
     } else {
       drawThreshold(
         th,

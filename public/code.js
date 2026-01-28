@@ -529,7 +529,8 @@ function drawWISChart(
     const eth = STREAM_THRESHOLDS.ACTIVE;
 
     const diff = th - eth;
-    const halfDiff = diff / 2;
+    const halfDiff = Math.abs(diff / 2);
+    const mergedValue = (th + eth) / 2;
 
     const drawThreshold = (value, label, xOffset) => {
       if (value <= minY || value >= maxY) return;
@@ -553,12 +554,13 @@ function drawWISChart(
     };
 
     if (diff >= -10 || diff <= 10) {
-      const closest =
-        Math.abs(th - minY) < Math.abs(eth - minY)
-          ? { value: th, label: `Merged Threshold: ${(th + halfDiff).toFixed(1)}` }
-          : { value: eth, label: `Merged Threshold: ${(eth + halfDiff).toFixed(1)}` };
-
-      drawThreshold(closest.value, closest.label, width - margin.right - 140);
+      if (mergedValue > minY && mergedValue < maxY) {
+        drawThreshold(
+          mergedValue,
+          `Merged Threshold: ${mergedValue.toFixed(1)} (±${halfDiff.toFixed(1)})`,
+          width - margin.right - 220,
+        );
+      }
     } else {
       drawThreshold(
         th,

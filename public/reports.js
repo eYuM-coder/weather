@@ -511,7 +511,7 @@ function updateChangedCards(oldData, newData) {
     const oldR = oldData[i];
 
     // IF NEW WARNING → FULL REPLACE
-    if (!oldR || oldR.product_id !== newR.product_id) {
+    if (!oldR || oldR.event_code !== newR.event_code) {
       replaceCard(newR, i);
       return;
     }

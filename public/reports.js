@@ -382,7 +382,7 @@ function renderReportCard(report, index = 1) {
                 <circle cx="12" cy="10" r="3"></circle>
               </svg>
                 <span>${report.location}, ${report.state}</span>
-                <span class="text-gray-500">(${report.county_name})</span>
+                <span class="text-gray-500">(${report.county_name ? report.county_name : ""})</span>
               </div>
             </div>
           </div>

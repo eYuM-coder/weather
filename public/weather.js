@@ -902,7 +902,7 @@ function renderReportCard(report, index = 1) {
           </svg>
           ${report.location}, ${report.state}
         </span>
-        <span class="font-semibold time-ago" style="color: ${hexToRgba(colors?.main)};">${timeAgo}</span>
+        <span class="font-semibold" style="color: ${hexToRgba(colors?.main)};" id="report-time-ago">${timeAgo}</span>
       </div>
       <div class="mt-2 flex items-center justify-between text-[10px] text-gray-500 font-mono uppercase">
         <span>${report.source.toLowerCase() === "measurable" ? "MEASURED" : "OBSERVED"}</span>
@@ -971,7 +971,7 @@ function renderWarningCard(warning, index = 1) {
         </svg>
         ${stateCode}
       </span>
-      <span class="font-semibold text-monitor-warning time-expires">${expires}</span>
+      <span class="font-semibold text-monitor-warning" id="warning-time-expires">${expires}</span>
     </div>
     <div class="mt-2 flex items-center justify-between text-[10px] text-gray-500 font-mono uppercase">
       <span>Pop: ${pop}</span>
@@ -1030,7 +1030,7 @@ function updateTopReportTimers() {
     );
     if (!card) return;
 
-    const timeAgoEl = card.querySelector(".time-ago");
+    const timeAgoEl = card.querySelector("#report-time-ago");
     if (!timeAgoEl) return;
 
     const times = getReportTime(r);
@@ -1087,7 +1087,7 @@ function updateTopWarningTimers() {
     );
     if (!card) return;
 
-    const timeExpiresEl = card.querySelector(".time-expires");
+    const timeExpiresEl = card.querySelector("#warning-time-expires");
     if (!timeExpiresEl) return;
 
     timeExpiresEl.textContent = getWarningTime(w);

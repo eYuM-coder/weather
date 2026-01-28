@@ -816,7 +816,7 @@ const ICON_TORNADO = `
     viewBox="0 0 24 24"
     fill="none" stroke="currentColor" stroke-width="2"
     stroke-linecap="round" stroke-linejoin="round"
-    class="h-6 w-6"
+    class="w-5 h-5 md:w-6 md:h-6"
   >
     <path d="M21 4H3" />
     <path d="M18 8H6" />
@@ -837,7 +837,7 @@ const ICON_SEVERE_TSTM = `
     stroke-width="2"
     stroke-linecap="round"
     stroke-linejoin="round"
-    class="lucide lucide-zap h-6 w-6"
+    class="lucide lucide-zap w-5 h-5 md:w-6 md:h-6"
   >
     <path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"></path>
   </svg>
@@ -854,7 +854,7 @@ const ICON_FLOOD = `
     stroke-width="2"
     stroke-linecap="round"
     stroke-linejoin="round"
-    class="lucide lucide-cloud-rain w-6 h-6"
+    class="lucide lucide-cloud-rain w-5 h-5 md:w-6 md:h-6"
   >
     <path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"></path>
     <path d="M16 14v6"></path>
@@ -872,7 +872,7 @@ const ICON_WINTER = `
     stroke-width="2"
     stroke-linecap="round"
     stroke-linejoin="round"
-    class="lucide lucide-snowflake w-6 h-6"
+    class="lucide lucide-snowflake w-5 h-5 md:w-6 md:h-6"
   >
     <line x1="2" y1="12" x2="22" y2="12" />
     <line x1="12" y1="2" x2="12" y2="22" />
@@ -893,7 +893,7 @@ const ICON_WIND = `
     stroke-width="2"
     stroke-linecap="round"
     stroke-linejoin="round"
-    class="lucide lucide-wind w-6 h-6"
+    class="lucide lucide-wind w-5 h-5 md:w-6 md:h-6"
   >
     <path d="M12.8 19.6A2 2 0 1 0 14 16H2"></path>
     <path d="M17.5 8a2.5 2.5 0 1 1 2 4H2"></path>
@@ -911,7 +911,7 @@ const ICON_ALERT = `
     stroke-width="2"
     stroke-linecap="round"
     stroke-linejoin="round"
-    class="lucide lucide-circle-alert h-6 w-6"
+    class="lucide lucide-circle-alert w-5 h-5 md:w-6 md:h-6"
   >
     <circle cx="12" cy="12" r="10"></circle>
     <line x1="12" x2="12" y1="8" y2="12"></line>
@@ -929,7 +929,7 @@ const ICON_CLOCK = `
     stroke-width="2"
     stroke-linecap="round"
     stroke-linejoin="round"
-    class="lucide lucide-clock w-6 h-6 text-zinc-400"
+    class="lucide lucide-clock w-5 h-5 md:w-6 md:h-6 text-zinc-400"
   >
     <circle cx="12" cy="12" r="10"></circle>
     <polyline points="12 6 12 12 16 14"></polyline>

@@ -626,7 +626,7 @@ function drawWISChart(
       ctx.setLineDash([]);
     };
 
-    if (diff <= 10) {
+    if (diff <= 25) {
       if (mergedValue > minY && mergedValue < maxY) {
         drawThreshold(
           mergedValue,

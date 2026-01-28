@@ -1100,31 +1100,6 @@ async function updateWeatherIntensity() {
   updateText();
 
   const intensity = parseFloat(weather_intensity_score);
-  let descriptor;
-  if (intensity < 30)
-    descriptor =
-      "Mostly Quiet — Weather across the country is calm with minimal to no eYuM team activity.";
-  else if (intensity < 50)
-    descriptor =
-      "Some Activity — Weather is occurring somewhere; monitoring continues.";
-  else if (intensity < 70)
-    descriptor =
-      "Notable Weather — eYuM's team is in standby mode watching developing conditions.";
-  else if (intensity < 100)
-    descriptor =
-      "Significant Events — A developing situation; live coverage may be ongoing.";
-  else if (intensity < 150)
-    descriptor =
-      "Multiple Areas Impacted — Several regions affected by severe weather; full coverage likely.";
-  else if (intensity < 250)
-    descriptor =
-      "Major Outbreak — Ongoing severe weather outbreak requiring all hands on deck.";
-  else if (intensity < 350)
-    descriptor =
-      "Extreme Event — A high-end event requiring continuous live coverage.";
-  else
-    descriptor =
-      "Potentially Historic — Scores above 500 occur only during major outbreaks per RHY team metrics.";
 
   scoreElement.textContent = weather_intensity_score.toFixed(2);
   document.getElementById("scoreThreshold").textContent =
@@ -1180,7 +1155,6 @@ async function updateWeatherIntensity() {
       "animate-pulse",
     );
     lucideActivityElement.classList.add("text-gray-500");
-    descElement.style.color = color;
     scoreElement.classList.remove("scale-110");
     lowScore.style.color = lowScoreColor;
     highScore.style.color = highScoreColor;

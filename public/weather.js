@@ -1090,7 +1090,7 @@ function updateTopWarningTimers() {
     const timeExpiresEl = card.querySelector("#warning-time-expires");
     if (!timeExpiresEl) return;
 
-    timeExpiresEl.textContent = getWarningTime(w);
+    timeExpiresEl.textContent = getExpiresIn(w);
   });
 }
 

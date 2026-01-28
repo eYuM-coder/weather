@@ -600,8 +600,14 @@ function drawWISChart(
   ) {
     const th = data.wis.todays_stream_info.weather_intensity_score_threshold;
     const eth = STREAM_THRESHOLDS.ACTIVE;
-    if (th > minY && th < maxY) {
-      const y = yToPixel(th);
+
+    const diff = Math.abs(th - eth);
+
+    const drawThreshold = (value, label, xOffset) => {
+      if (value <= minY || value >= maxY) return;
+
+      const y = yToPixel(value);
+
       ctx.strokeStyle = "#ef4444";
       ctx.lineWidth = 2;
       ctx.setLineDash([5, 5]);
@@ -609,35 +615,33 @@ function drawWISChart(
       ctx.moveTo(margin.left, y);
       ctx.lineTo(width - margin.right, y);
       ctx.stroke();
+
       ctx.fillStyle = "#ef4444";
       ctx.font = 'bold 11px "JetBrains Mono", monospace';
       ctx.textAlign = "left";
-      ctx.fillText(
+      ctx.fillText(label, xOffset, y - 5);
+
+      ctx.setLineDash([]);
+    };
+
+    if (diff <= 10) {
+      const closest =
+        Math.abs(th - minY) < Math.abs(eth - minY)
+          ? { value: th, label: `Threshold: ${th.toFixed(1)}` }
+          : { value: eth, label: `Threshold: ${eth.toFixed(1)}` };
+
+      drawThreshold(closest.value, closest.label, width - margin.right - 100);
+    } else {
+      drawThreshold(
+        th,
         `Ryan Hall, Y'all's Threshold: ${th.toFixed(1)}`,
         width - margin.right - 220,
-        y - 5,
       );
-      ctx.setLineDash([]);
-    }
-
-    if (eth > minY && eth < maxY) {
-      const y = yToPixel(eth);
-      ctx.strokeStyle = "#ef4444";
-      ctx.lineWidth = 2;
-      ctx.setLineDash([5, 5]);
-      ctx.beginPath();
-      ctx.moveTo(margin.left, y);
-      ctx.lineTo(width - margin.right, y);
-      ctx.stroke();
-      ctx.fillStyle = "#ef4444";
-      ctx.font = 'bold 11px "JetBrains Mono", monospace';
-      ctx.textAlign = "left";
-      ctx.fillText(
-        `eYuM's threshold: ${eth.toFixed(1)}`,
-        width - margin.right - 145,
-        y - 5,
+      drawThreshold(
+        eth,
+        `eYuM's Threshold: ${eth.toFixed(1)}`,
+        width - margin.right - 140,
       );
-      ctx.setLineDash([]);
     }
   }
 

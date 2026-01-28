@@ -876,7 +876,7 @@ function renderReportCard(report, index = 1) {
         <span class="text-xs font-bold font-mono text-gray-500">#${String(index).padStart(2, "0")}</span>
         <span style="color: ${hexToRgba(colors?.main || "#ffffff")};">${icon}</span>
         <p class="flex-1 font-semibold leading-tight text-sm text-white line-clamp-2 font-tech tracking-wide">${report.event_type}</p>
-        <span class="absolute top-0 right-0 text-[9px] uppercase tracking-widest rounded-sm px-1.5 py-0.5 border whitespace-nowrap font-mono font-bold" style="background-color: ${hexToRgba(colors?.main, 0.19)}; border-color: ${borderCol}; color: ${hexToRgba(colors?.main)}">${report.magnitude} ${report.unit}</span>
+        ${report.magnitude && report.unit ? `<span class="absolute top-0 right-0 text-[9px] uppercase tracking-widest rounded-sm px-1.5 py-0.5 border whitespace-nowrap font-mono font-bold" style="background-color: ${hexToRgba(colors?.main, 0.19)}; border-color: ${borderCol}; color: ${hexToRgba(colors?.main)}">${report.magnitude} ${report.unit}</span>` : ""}
       </div>
       <div class="mt-3 flex items-center justify-between text-xs text-gray-400 font-mono">
         <span class="flex items-center gap-1">
@@ -899,7 +899,7 @@ function renderReportCard(report, index = 1) {
           </svg>
           ${report.location}, ${report.state}
         </span>
-        <span class="font-semibold" style="color: ${hexToRgba(colors?.main)};">${timeAgo}</span>
+        <span class="font-semibold time-ago" style="color: ${hexToRgba(colors?.main)};">${timeAgo}</span>
       </div>
       <div class="mt-2 flex items-center justify-between text-[10px] text-gray-500 font-mono uppercase">
         <span>${report.source.toLowerCase() === "measurable" ? "MEASURED" : "OBSERVED"}</span>
@@ -968,7 +968,7 @@ function renderWarningCard(warning, index = 1) {
         </svg>
         ${stateCode}
       </span>
-      <span class="font-semibold text-monitor-warning">${expires}</span>
+      <span class="font-semibold text-monitor-warning time-expires">${expires}</span>
     </div>
     <div class="mt-2 flex items-center justify-between text-[10px] text-gray-500 font-mono uppercase">
       <span>Pop: ${pop}</span>
@@ -980,31 +980,115 @@ function renderWarningCard(warning, index = 1) {
 }
 
 async function updateCurrentTopReports() {
-  const res = await fetch(
-    `https://public.yallsoft.app/rhy/reports.json?t=${new Date().getTime()}`,
-  );
-  const data = await res.json();
+  try {
+    const res = await fetch(
+      `https://public.yallsoft.app/rhy/reports.json?t=${Date.now()}`,
+    );
+    const data = await res.json();
+    const newReports = data.reports.slice(0, 5);
 
-  const topReports = document.getElementById("topReports");
+    const container = document.getElementById("topReports");
 
-  topReports.innerHTML = data.reports
-    .slice(0, 5)
-    .map((r, i) => renderReportCard(r, i + 1))
-    .join("");
+    if (lastTopReports.length === 0) {
+      container.innerHTML = newReports
+        .map((r, i) => renderReportCard(r, i + 1))
+        .join("");
+    } else {
+      newReports.forEach((r, i) => {
+        const old = lastTopReports[i];
+
+        if (!old || old.event_type !== r.event_type || old.score !== r.score) {
+          replaceTopReportCard(r, i);
+        }
+      });
+    }
+
+    lastTopReports = newReports;
+  } catch (e) {
+    console.warn("Top reports fetch failed", e);
+  }
+}
+
+function replaceTopReportCard(report, index) {
+  const container = document.getElementById("topReports");
+  const card = container.children[index];
+  if (!card) return;
+
+  const temp = document.createElement("div");
+  temp.innerHTML = renderReportCard(report, index + 1);
+
+  container.replaceChild(temp.firstElementChild, card);
+}
+
+function updateTopReportTimers() {
+  lastTopReports.forEach((r, i) => {
+    const card = document.querySelector(
+      `#topReports > div:nth-child(${i + 1})`,
+    );
+    if (!card) return;
+
+    const timeAgoEl = card.querySelector(".time-ago");
+    if (!timeAgoEl) return;
+
+    const times = getReportTime(r);
+
+    timeAgoEl.textContent = `${times}`;
+  });
 }
 
 async function updateCurrentTopWarnings() {
-  const res = await fetch(
-    `https://public.yallsoft.app/rhy/top_10_warnings.json?t=${new Date().getTime()}`,
-  );
-  const data = await res.json();
+  try {
+    const res = await fetch(
+      `https://public.yallsoft.app/rhy/top_10_warnings.json?t=${Date.now()}`,
+    );
+    const data = await res.json();
+    const newWarnings = data.slice(0, 5);
 
-  const topWarnings = document.getElementById("topWarnings");
+    const container = document.getElementById("topWarnings");
 
-  topWarnings.innerHTML = data
-    .slice(0, 5)
-    .map((w, i) => renderWarningCard(w, i + 1))
-    .join("");
+    if (lastTopWarnings.length === 0) {
+      container.innerHTML = newWarnings
+        .map((w, i) => renderWarningCard(w, i + 1))
+        .join("");
+    } else {
+      newWarnings.forEach((w, i) => {
+        const old = lastTopWarnings[i];
+
+        if (!old || old.id !== w.id || old.area !== w.area) {
+          replaceTopWarningCard(w, i);
+        }
+      });
+    }
+
+    lastTopWarnings = newWarnings;
+  } catch (e) {
+    console.warn("Top warnings fetch failed", e);
+  }
+}
+
+function replaceTopWarningCard(warning, index) {
+  const container = document.getElementById("topWarnings");
+  const card = container.children[index];
+  if (!card) return;
+
+  const temp = document.createElement("div");
+  temp.innerHTML = renderWarningCard(warning, index + 1);
+
+  container.replaceChild(temp.firstElementChild, card);
+}
+
+function updateTopWarningTimers() {
+  lastTopWarnings.forEach((w, i) => {
+    const card = document.querySelector(
+      `#topWarnings > div:nth-child(${i + 1})`,
+    );
+    if (!card) return;
+
+    const timeAgoEl = card.querySelector(".time-ago");
+    if (!timeAgoEl) return;
+
+    timeAgoEl.textContent = getWarningTime(w);
+  });
 }
 
 function renderAffectedRegion(forecastObject) {
@@ -2116,6 +2200,9 @@ async function loadHistoryData() {
   observePanels();
   renderActivePanels();
 }
+
+setInterval(updateTopReportTimers, 1000);
+setInterval(updateTopWarningTimers, 1000);
 
 // ==========================
 // RUN ALL

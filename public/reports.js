@@ -582,7 +582,7 @@ function updateCardBoxes(r, index) {
     reportRawScoreEl.textContent = `${r.raw_score.toFixed(1)}`;
   }
   if (reportTimeFactorEl) {
-    reportTimeFactorEl.textContent = `${r.time_factor.toFixed(1)}x`;
+    reportTimeFactorEl.textContent = `${r.time_factor.toFixed(2)}x`;
   }
 }
 

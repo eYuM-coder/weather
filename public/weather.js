@@ -1014,7 +1014,7 @@ async function updateCurrentTopReports() {
 
 function replaceTopReportCard(report, index) {
   const container = document.getElementById("topReports");
-  const card = container.children[index];
+  const card = container.querySelectorAll("a")[index];
   if (!card) return;
 
   const temp = document.createElement("div");
@@ -1024,10 +1024,10 @@ function replaceTopReportCard(report, index) {
 }
 
 function updateTopReportTimers() {
+  const cards = document.querySelectorAll("#topReports a");
+
   lastTopReports.forEach((r, i) => {
-    const card = document.querySelector(
-      `#topReports > div:nth-child(${i + 1})`,
-    );
+    const card = cards[i]
     if (!card) return;
 
     const timeAgoEl = card.querySelector("#report-time-ago");
@@ -1071,7 +1071,7 @@ async function updateCurrentTopWarnings() {
 
 function replaceTopWarningCard(warning, index) {
   const container = document.getElementById("topWarnings");
-  const card = container.children[index];
+  const card = container.querySelectorAll("a")[index];
   if (!card) return;
 
   const temp = document.createElement("div");
@@ -1081,10 +1081,10 @@ function replaceTopWarningCard(warning, index) {
 }
 
 function updateTopWarningTimers() {
+  const cards = document.querySelectorAll("#topWarnings a");
+
   lastTopWarnings.forEach((w, i) => {
-    const card = document.querySelector(
-      `#topWarnings > div:nth-child(${i + 1})`,
-    );
+    const card = cards[i];
     if (!card) return;
 
     const timeExpiresEl = card.querySelector("#warning-time-expires");

@@ -571,9 +571,9 @@ function updateCardBoxes(r, index) {
   );
   if (!card) return;
 
-  const reportScoreEl = card.getElementById("report-score");
-  const reportRawScoreEl = card.getElementById("report-raw-score");
-  const reportTimeFactorEl = card.getElementById("report-time-factor");
+  const reportScoreEl = card.querySelector("#report-score");
+  const reportRawScoreEl = card.querySelector("#report-raw-score");
+  const reportTimeFactorEl = card.querySelector("#report-time-factor");
 
   if (reportScoreEl) {
     reportScoreEl.textContent = `${r.score.toFixed(1)}`;

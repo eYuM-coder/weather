@@ -1000,7 +1000,7 @@ async function updateCurrentTopReports() {
       newReports.forEach((r, i) => {
         const old = lastTopReports[i];
 
-        if (!old || old.event_type !== r.event_type || old.score !== r.score) {
+        if (!old || old.event_type !== r.event_type) {
           replaceTopReportCard(r, i);
         }
       });

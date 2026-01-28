@@ -528,7 +528,8 @@ function drawWISChart(
     const th = data.wis.todays_stream_info.weather_intensity_score_threshold;
     const eth = STREAM_THRESHOLDS.ACTIVE;
 
-    const diff = Math.abs(th - eth);
+    const diff = th - eth;
+    const halfDiff = diff / 2;
 
     const drawThreshold = (value, label, xOffset) => {
       if (value <= minY || value >= maxY) return;
@@ -551,11 +552,11 @@ function drawWISChart(
       ctx.setLineDash([]);
     };
 
-    if (diff <= 10) {
+    if (diff >= -10 || diff <= 10) {
       const closest =
         Math.abs(th - minY) < Math.abs(eth - minY)
-          ? { value: th, label: `Threshold: ${th.toFixed(1)}` }
-          : { value: eth, label: `Threshold: ${eth.toFixed(1)}` };
+          ? { value: th, label: `Threshold: ${(th + halfDiff).toFixed(1)}` }
+          : { value: eth, label: `Threshold: ${(eth + halfDiff).toFixed(1)}` };
 
       drawThreshold(closest.value, closest.label, width - margin.right - 100);
     } else {

@@ -1156,8 +1156,6 @@ async function updateWeatherIntensity() {
     );
     lucideActivityElement.classList.add("text-gray-500");
     scoreElement.classList.remove("scale-110");
-    lowScore.style.color = lowScoreColor;
-    highScore.style.color = highScoreColor;
   }, 500);
 
   lastIntensity = intensity;

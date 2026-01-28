@@ -1084,10 +1084,10 @@ function updateTopWarningTimers() {
     );
     if (!card) return;
 
-    const timeAgoEl = card.querySelector(".time-ago");
-    if (!timeAgoEl) return;
+    const timeExpiresEl = card.querySelector(".time-expires");
+    if (!timeExpiresEl) return;
 
-    timeAgoEl.textContent = getWarningTime(w);
+    timeExpiresEl.textContent = getWarningTime(w);
   });
 }
 

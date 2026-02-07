@@ -355,7 +355,12 @@ function getTimes(w) {
     Math.floor((now.getTime() - start.getTime()) / 1000),
     0,
   );
-  let percentage = remainingSec > 0 ? totalSec > 0 ? Math.min(elapsedSec / totalSec, 1) : 1 : 1;
+  let percentage =
+    remainingSec > 0
+      ? totalSec > 0
+        ? Math.min(elapsedSec / totalSec, 1)
+        : 1
+      : 1;
 
   return {
     remaining:
@@ -372,7 +377,8 @@ function getTimes(w) {
                 ` (${hrsLeft > 0 ? `${hrsLeft}h ` : ""}${minsLeft > 0 ? `${minsLeft}m ` : ""}${secsLeft}s)`
               : minsLeft === 0 && hrsLeft === 0
                 ? secsLeft.toString() + "s"
-                : secsLeft + ` (${hrsLeft > 0 ? `${hrsLeft}h ` : ""}${minsLeft > 0 ? `${minsLeft}m ` : ""}${secsLeft}s)`
+                : secsLeft +
+                  ` (${hrsLeft > 0 ? `${hrsLeft}h ` : ""}${minsLeft > 0 ? `${minsLeft}m ` : ""}${secsLeft}s)`
           } remaining`
         : "Expired",
     duration: `Duration: ${totalHrs}h ${totalMins}m ${totalSecs}s total`,
@@ -679,7 +685,7 @@ function renderWarningCard(warning, index = 1) {
                 ${renderWarningBadges(warning)}
               </div>
               <div class="flex items-center gap-2 text-xs text-white/70 mt-1 font-mono">
-                ${stateCode}: ${counties}
+                ${stateCode && counties ? `${stateCode}: ${counties}` : "United States"}
               </div>
             </div>
           </div>

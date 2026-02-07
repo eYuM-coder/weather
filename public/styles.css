@@ -32,7 +32,9 @@ body {
 .tzMenuEnterActive {
   opacity: 1;
   transform: translateY(0px) scale(1);
-  transition: opacity 120ms ease, transform 120ms ease;
+  transition:
+    opacity 120ms ease,
+    transform 120ms ease;
 }
 
 .tzMenuExit {
@@ -43,7 +45,9 @@ body {
 .tzMenuExitActive {
   opacity: 0;
   transform: translateY(-4px) scale(0.95);
-  transition: opacity 100ms ease, transform 100ms ease;
+  transition:
+    opacity 100ms ease,
+    transform 100ms ease;
 }
 
 /* Prevent layout shift during animations */
@@ -54,7 +58,8 @@ body {
 .motion-fade-up {
   opacity: 0;
   transform: translateY(10px);
-  transition: opacity 0.3s cubic-bezier(0.25, 0.1, 0.25, 1),
+  transition:
+    opacity 0.3s cubic-bezier(0.25, 0.1, 0.25, 1),
     transform 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
@@ -89,7 +94,9 @@ body {
 #rhyProgressBar {
   height: 100%;
   width: 0%;
-  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1), background 0.3s ease,
+  transition:
+    width 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+    background 0.3s ease,
     box-shadow 0.3s ease;
   position: relative;
 }

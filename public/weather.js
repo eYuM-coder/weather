@@ -94,7 +94,7 @@ refreshButton.addEventListener("click", () => {
 
 async function updateWISThreshold() {
   const threshold = await fetch(
-    `https://quiet-wood-94aa.nathaniel2007w.workers.dev?t=${new Date().getTime()}`,
+    `https://serenia.eyum.dev/api/thresholds?t=${new Date().getTime()}`,
   );
   const threshold_data = await threshold.json();
   STREAM_THRESHOLDS.ACTIVE = threshold_data.thresholds?.ACTIVE;
@@ -1027,7 +1027,7 @@ function updateTopReportTimers() {
   const cards = document.querySelectorAll("#topReports a");
 
   lastTopReports.forEach((r, i) => {
-    const card = cards[i]
+    const card = cards[i];
     if (!card) return;
 
     const timeAgoEl = card.querySelector("#report-time-ago");
@@ -1224,7 +1224,7 @@ function classifyConcern(text) {
 function concernColor(text) {
   text = text.toLowerCase();
 
-  if (text.includes("dangerous"))
+  if (text.includes("dangerous") || text.includes("extreme"))
     return {
       color: "text-red-500",
       bg: "bg-red-500/10",
@@ -1410,36 +1410,52 @@ function createConcernNode(text, index) {
   return div;
 }
 
-function renderForecastSummary(forecastSummaryProduct, id, format = true) {
+function renderForecastSummary(
+  forecastSummaryProduct,
+  id,
+  groupSize,
+  format = true,
+) {
   const el = document.getElementById(id);
+  if (!el) return;
   if (!forecastSummaryProduct?.summary) return;
+
+  // Clear previous content
+  el.innerHTML = "";
 
   const text = forecastSummaryProduct.summary;
 
-  // Split into sentences
-  if (format) {
-    const sentences = text
-      .split(". ")
-      .map((x) => x.trim())
-      .filter(Boolean);
-
-    let paragraphs = [];
-
-    for (let i = 0; i < sentences.length; i += 3) {
-      let group = sentences
-        .slice(i, i + 3)
-        .join(". ")
-        .trim();
-
-      if (!group.endsWith(".")) group += ".";
-
-      paragraphs.push(`<p class="text-zinc-300">${group}</p>`);
-    }
-
-    el.innerHTML = paragraphs.join("\n");
-  } else {
-    el.textContent = `${text}`;
+  if (!format) {
+    el.textContent = text;
+    return;
   }
+
+  const sentences = text
+    .split(". ")
+    .map((s) => s.trim())
+    .filter(Boolean);
+
+  sentences.map((s, i, arr) => {
+    // only start groups at multiples of groupSize
+    if (i % groupSize !== 0) return null;
+
+    // slice up to groupSize or whatever is left
+    const group = arr
+      .slice(i, i + groupSize)
+      .join(". ")
+      .trim();
+
+    if (!group) return null;
+
+    // ensure ends with a period
+    const finalText = group.endsWith(".") ? group : group + ".";
+
+    const p = document.createElement("p");
+    p.className = "text-zinc-300";
+    p.textContent = finalText;
+
+    el.appendChild(p);
+  });
 }
 
 function formatShortDate(date) {
@@ -1533,14 +1549,18 @@ function updateForecastDate(forecastSummaryProduct, id) {
 async function updateTodaysForecast() {
   const affectedRegionEl = document.getElementById("todaysAffectedRegions");
 
-  renderForecastSummary(s.todays_forecast_summary, "todaysForecastText");
+  renderForecastSummary(s.todays_forecast_summary, "todaysForecastText", 3);
   updateForecastDate(s.todays_forecast_summary, "todaysForecastDate");
   affectedRegionEl.innerHTML = renderAffectedRegion(s.todays_forecast_summary);
   updateForecastConcerns(s.todays_forecast_summary, "todaysKeyConcerns");
 }
 
 async function updateTomorrowsForecast() {
-  renderForecastSummary(s.tomorrows_forecast_summary, "tomorrowsForecastText");
+  renderForecastSummary(
+    s.tomorrows_forecast_summary,
+    "tomorrowsForecastText",
+    2,
+  );
   updateForecastDate(s.tomorrows_forecast_summary, "tomorrowsForecastDate");
   updateTomorrowsForecastConcerns("tomorrowsKeyConcerns");
 }
@@ -1549,6 +1569,7 @@ async function updateThisWeeksForecast() {
   renderForecastSummary(
     s?.this_weeks_forecast_summary,
     "thisWeeksForecastText",
+    1,
     false,
   );
   updateForecastDate(s?.this_weeks_forecast_summary?.start_date, "startDate");
@@ -1562,7 +1583,7 @@ async function updateThisWeeksForecast() {
 function createForecastCard(dateStr, summary, dateKey) {
   const card = document.createElement("div");
   card.className =
-    "bg-monitor-card border border-monitor-border/30 rounded-lg p-4 hover:border-monitor-active/30 " +
+    "forecast-card bg-monitor-card border border-monitor-border/30 rounded-lg p-4 hover:border-monitor-active/30 " +
     "opacity-1 translate-y-3 transition-all duration-300";
 
   card.dataset.date = dateKey; // 🔥 identify card

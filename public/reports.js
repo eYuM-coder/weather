@@ -360,7 +360,7 @@ function renderReportCard(report, index = 1) {
             <div style="color: ${colors?.main}">${icon}</div>
             <div class="min-w-0 flex-1">
               <div class="flex items-center gap-2 flex-wrap">
-                <span class="px-1.5 py-0.5 text-[10px] font-bold font-mono uppercase tracking-wider rounded" style="background-color: ${hexToRgba(colors?.main)}; color: white;">${report.source.toLowerCase() === "measurable" ? "MEASURED" : "OBSERVED"}</span>
+                <span class="px-1.5 py-0.5 text-[10px] font-bold font-mono uppercase tracking-wider rounded" style="background-color: ${hexToRgba(colors?.main)}; color: ${report.event_code === "S" || report.event_code === "Z" ? "white" : "black"};">${report.source.toLowerCase() === "measurable" ? "MEASURED" : "OBSERVED"}</span>
                 <span class="text-base md:text-lg font-bold font-tech uppercase tracking-wide text-white break-words leading-tight">${report.event_type}</span>
               </div>
               <div class="flex items-center gap-2 text-xs text-white/70 mt-1 font-mono">

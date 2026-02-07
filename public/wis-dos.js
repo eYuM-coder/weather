@@ -925,13 +925,22 @@ async function updateDosUI(data) {
 
   const likelyEl = document.getElementById("likelyUploadCount");
   const possibleEl = document.getElementById("possibleUploadCount");
+  const possibleDotEl = document.getElementById("possibleUploadCountDot");
 
   if (likelyEl) {
-    likelyEl.innerHTML = `<span class="text-green-400 font-semibold">${likelyUploads}</span> likely uploads`;
+    likelyEl.innerHTML = `<span class="text-green-400 font-semibold">${likelyUploads}</span> LIKELY UPLOADS`;
   }
 
   if (possibleEl) {
-    possibleEl.innerHTML = `<span class="text-yellow-400 font-semibold">${possibleUploads}</span> possible`;
+    possibleEl.innerHTML = `<span class="text-yellow-400 font-semibold">${possibleUploads}</span> POSSIBLE`;
+  } else {
+    possibleEl.innerHTML = "";
+  }
+
+  if (possibleDotEl && possibleUploads > 0) {
+    possibleDotEl.textContent = "•";
+  } else {
+    possibleDotEl.textContent = "";
   }
 
   function pickIcon(score, comps) {
@@ -1040,7 +1049,7 @@ async function updateWeatherIntensity() {
 
   WISData = data;
   const threshold = await fetch(
-    `https://quiet-wood-94aa.nathaniel2007w.workers.dev?t=${new Date().getTime()}`,
+    `https://serenia.eyum.dev/api/thresholds?t=${new Date().getTime()}`,
   );
   const threshold_data = await threshold.json();
   STREAM_THRESHOLDS.STANDBY = threshold_data.thresholds?.STANDBY;

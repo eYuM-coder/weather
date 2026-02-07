@@ -846,7 +846,7 @@ const ICON_SEVERE_TSTM = `
   </svg>
 `;
 
-const ICON_FLOOD = `
+const ICON_RAIN = `
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="24"
@@ -1397,13 +1397,22 @@ async function updateDosUI(data) {
 
   const likelyEl = document.getElementById("likelyUploadCount");
   const possibleEl = document.getElementById("possibleUploadCount");
+  const possibleDotEl = document.getElementById("possibleUploadCountDot");
 
   if (likelyEl) {
-    likelyEl.innerHTML = `<span class="text-green-400 font-semibold">${likelyUploads}</span> likely uploads`;
+    likelyEl.innerHTML = `<span class="text-green-400 font-semibold">${likelyUploads}</span> LIKELY UPLOADS`;
   }
 
-  if (possibleEl) {
-    possibleEl.innerHTML = `<span class="text-yellow-400 font-semibold">${possibleUploads}</span> possible`;
+  if (possibleEl && possibleUploads > 0) {
+    possibleEl.innerHTML = `<span class="text-yellow-400 font-semibold">${possibleUploads}</span> POSSIBLE`;
+  } else {
+    possibleEl.innerHTML = "";
+  }
+
+  if (possibleDotEl && possibleUploads > 0) {
+    possibleDotEl.textContent = "•";
+  } else {
+    possibleDotEl.textContent = "";
   }
 
   function pickIcon(score, comps) {
@@ -1743,7 +1752,7 @@ async function updateWeatherIntensity() {
 
   WISData = data;
   const threshold = await fetch(
-    `https://quiet-wood-94aa.nathaniel2007w.workers.dev?t=${new Date().getTime()}`,
+    `https://serenia.eyum.dev/api/thresholds?t=${new Date().getTime()}`,
   );
   const threshold_data = await threshold.json();
   STREAM_THRESHOLDS.STANDBY = threshold_data.thresholds?.STANDBY;
@@ -2477,23 +2486,23 @@ function getScheduledRTF(scheduledAt) {
 }
 
 function embedVideoInfo(item, prefix, containerId) {
-  const liveStreamingDetails = item.liveStreamingDetails;
-  const timePublishedAt = item.snippet.publishedAt;
-  const stats = item.statistics;
+  const liveStreamingDetails = item?.liveStreamingDetails;
+  const timePublishedAt = item?.snippet?.publishedAt;
+  const stats = item?.statistics;
 
   let timeAgo;
   if (
     liveStreamingDetails?.scheduledStartTime &&
     !liveStreamingDetails?.actualStartTime
   ) {
-    timeAgo = getScheduledRTF(liveStreamingDetails.scheduledStartTime);
+    timeAgo = getScheduledRTF(liveStreamingDetails?.scheduledStartTime);
   } else {
     const rtf = new Intl.RelativeTimeFormat("en", { numeric: "always" });
 
     const publishedAt = liveStreamingDetails?.actualStartTime
-      ? new Date(liveStreamingDetails.actualStartTime)
+      ? new Date(liveStreamingDetails?.actualStartTime)
       : liveStreamingDetails !== undefined
-        ? new Date(liveStreamingDetails.scheduledStartTime)
+        ? new Date(liveStreamingDetails?.scheduledStartTime)
         : new Date(timePublishedAt);
     const now = new Date();
     const diffMs = Math.abs(now - publishedAt);
@@ -2530,7 +2539,7 @@ function embedVideoInfo(item, prefix, containerId) {
       <path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"></path>
       <circle cx="12" cy="12" r="3"></circle>
     </svg>
-    <span class="truncate">${formatNumber(stats.viewCount)} views</span>
+    <span class="truncate">${formatNumber(stats?.viewCount)} views</span>
   </div>`;
 }
 
